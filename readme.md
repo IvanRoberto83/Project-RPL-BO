@@ -22,6 +22,6 @@
 ```
 - Alphantius Vincent (71230967)
 - Email: 71230967@students.ukdw.ac.id /  alphantius.vincent@ti.ukdw.ac.id
-- GitHub: 
+- GitHub: alphantiusvincent
 ```
 
