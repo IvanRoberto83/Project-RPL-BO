@@ -18,4 +18,10 @@
 - Email: 71231018@students.ukdw.ac.id /  bernadus.xaverius@ti.ukdw.ac.id
 - GitHub: NdusFTI
 ```
+### Anggota 4
+```
+- Alphantius Vincent (71230967)
+- Email: 71230967@students.ukdw.ac.id /  alphantius.vincent@ti.ukdw.ac.id
+- GitHub: 
+```
 
