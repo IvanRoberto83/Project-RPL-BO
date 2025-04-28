@@ -91,12 +91,12 @@
         </VBox>
         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="282.0" spacing="20.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
             <children>
-                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="LOGIN" textAlignment="CENTER">
+                <Button fx:id="btn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="LOGIN" textAlignment="CENTER">
                     <font>
                         <Font name="Arial Black" size="12.0" />
                     </font>
                 </Button>
-                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onRegister" prefHeight="25.0" prefWidth="93.0" text="REGISTER" textAlignment="CENTER">
+                <Button fx:id="btn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onRegister" prefHeight="25.0" prefWidth="93.0" text="REGISTER" textAlignment="CENTER">
                     <font>
                         <Font name="Arial Black" size="12.0" />
                     </font>

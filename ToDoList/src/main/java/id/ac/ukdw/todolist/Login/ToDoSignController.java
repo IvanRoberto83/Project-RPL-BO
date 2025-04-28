@@ -22,6 +22,9 @@ import java.sql.SQLException;
 
 public class ToDoSignController {
     @FXML
+    private Button btn;
+
+    @FXML
     private Pane bgKanan;
 
     @FXML

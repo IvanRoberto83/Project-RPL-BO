@@ -85,7 +85,7 @@
         </VBox>
         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
             <children>
-                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="86.0" text="CREATE" textAlignment="CENTER">
+                <Button fx:id="btn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="86.0" text="CREATE" textAlignment="CENTER">
                     <font>
                         <Font name="Arial Black" size="12.0" />
                     </font>
