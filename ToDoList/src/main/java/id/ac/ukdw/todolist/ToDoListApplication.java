@@ -12,9 +12,9 @@ import java.io.IOException;
 public class ToDoListApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ToDoListApplication.class.getResource("Login/ToDoLogin.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ToDoListApplication.class.getResource("Main/ToDoToday.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        stage.setTitle("ToDoList Login");
+        stage.setTitle("ToDoList Today");
         stage.setScene(scene);
         stage.show();
     }

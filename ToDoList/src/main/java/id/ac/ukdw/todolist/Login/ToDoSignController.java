@@ -52,7 +52,7 @@ public class ToDoSignController {
 
     @FXML
     public void onRegister(ActionEvent actionEvent) throws IOException {
-        this.loadScene("Login/ToDoRegister.fxml", "ToDoList Register", actionEvent);
+        this.loadScene("Login/ToDoToday.fxml", "ToDoList Register", actionEvent);
     }
 
     @FXML

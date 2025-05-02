@@ -8,7 +8,7 @@
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.todolist.Login.ToDoSignController">
     <stylesheets>
-        <URL value="@../../styles/style.css" />
+        <URL value="@../../styles/LoginStyle.css" />
     </stylesheets>
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="10.0" prefWidth="282.0" />
