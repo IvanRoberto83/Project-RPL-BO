@@ -52,7 +52,7 @@ public class ToDoSignController {
 
     @FXML
     public void onRegister(ActionEvent actionEvent) throws IOException {
-        this.loadScene("Login/ToDoToday.fxml", "ToDoList Register", actionEvent);
+        ToDoListApplication.setRoot("Login/ToDoRegister", "Register", false);
     }
 
     @FXML
@@ -70,7 +70,7 @@ public class ToDoSignController {
             if (success) {
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Registration Successful",
                         "You have successfully registered.");
-                loadScene("Login/ToDoLogin.fxml", "ToDoList Login", actionEvent);
+                ToDoListApplication.setRoot("Login/ToDoLogin", "ToDoLogin Auth", false);
             } else {
                 showAlert(Alert.AlertType.ERROR, "Error", "Registration Failed",
                         "An error occurred while registering. Please try again.");
@@ -92,7 +92,7 @@ public class ToDoSignController {
         try {
             if (validateUserExists(username)) {
                 resetUsername = username;
-                loadScene("Login/ToDoForgot.fxml", "ToDoList Forgot Password", mouseEvent);
+                ToDoListApplication.setRoot("Login/ToDoForgot", "Forgot Password", false);
             } else {
                 showAlert(Alert.AlertType.ERROR, "Error", "User Not Found", "No account found with username: " + username);
             }
@@ -119,7 +119,7 @@ public class ToDoSignController {
         try {
             if (resetUsername == null || resetUsername.isEmpty()) {
                 showAlert(Alert.AlertType.ERROR, "Error", "Session Expired", "Please restart the password reset process");
-                loadScene("Login/ToDoLogin.fxml", "ToDoList Login", actionEvent);
+                ToDoListApplication.setRoot("Login/ToDoLogin", "ToDoLogin Auth", false);
                 return;
             }
 
@@ -127,7 +127,7 @@ public class ToDoSignController {
             if (success) {
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Password Changed", "Your password has been successfully changed.");
                 resetUsername = null;
-                loadScene("Login/ToDoLogin.fxml", "ToDoList Login", actionEvent);
+                ToDoListApplication.setRoot("Login/ToDoLogin", "ToDoLogin Auth", false);
             } else {
                 showAlert(Alert.AlertType.ERROR, "Error", "Password Change Failed", "An error occurred while updating the password.");
             }
@@ -136,13 +136,26 @@ public class ToDoSignController {
         }
     }
 
-    private void loadScene(String fxmlFile, String title, Event event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ToDoListApplication.class.getResource(fxmlFile));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setTitle(title);
-        stage.setScene(scene);
-        stage.show();
+    @FXML
+    public void onLogin(ActionEvent actionEvent) {
+        String username = txtUser.getText();
+        String password = txtPass.getText();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Login Failed", "Please fill all the fields");
+            return;
+        }
+
+        try {
+            if (validateUser(username, password)) {
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Login Successful", "You have successfully logged in.");
+                ToDoListApplication.setRoot("Main/ToDoToday", "ToDoList", false);
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Error", "Login Failed", "Invalid username or password.");
+            }
+        } catch (SQLException e) {
+            handleDatabaseError(e);
+        }
     }
 
     private void showAlert(Alert.AlertType type, String title, String header, String content) {
@@ -178,6 +191,20 @@ public class ToDoSignController {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 return rs.next(); // Returns true if user exists
+            }
+        }
+    }
+
+    private boolean validateUser(String username, String password) throws SQLException {
+        String sql = "SELECT 1 FROM user WHERE username = ? AND password = ?";
+        try (Connection connection = DBConnectionManager.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
             }
         }
     }
