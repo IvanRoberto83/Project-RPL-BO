@@ -115,7 +115,7 @@ public class ToDoMenuController implements Initializable {
 
     @FXML
     void onCreate(ActionEvent event) {
-
+        ToDoListApplication.setRoot("Main/ToDoCreate", "Create New Task", false);
     }
 
     @FXML
@@ -125,6 +125,6 @@ public class ToDoMenuController implements Initializable {
 
     @FXML
     void onEdit(ActionEvent event) {
-
+        ToDoListApplication.setRoot("Main/ToDoEdit", "Edit Task", false);
     }
 }
