@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.todolist.Login.ToDoSignController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.todolist.Menu.ToDoMenuController">
     <stylesheets>
-        <URL value="@../../styles/MainStyle.css" />
+        <URL value="@../../styles/TodayStyle.css" />
     </stylesheets>
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="10.0" prefWidth="282.0" />
@@ -24,12 +30,12 @@
     <children>
         <Pane fx:id="bgKanan" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowSpan="5">
             <children>
-                <Button fx:id="btn" alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="143.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="22.0" text="➕" textAlignment="CENTER">
+                <Button fx:id="createBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="143.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="22.0" text="➕" textAlignment="CENTER">
                     <font>
                         <Font name="Arial Black" size="12.0" />
                     </font>
                 </Button>
-                <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutX="29.0" layoutY="32.0" prefHeight="23.0" prefWidth="180.0" text="Saturday, 17/08/1945" textAlignment="CENTER">
+                <Label fx:id="tanggal" alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutX="29.0" layoutY="32.0" prefHeight="23.0" prefWidth="180.0" text="Saturday, 17/08/1945" textAlignment="CENTER">
                     <font>
                         <Font name="Arial Black" size="15.0" />
                     </font>
@@ -44,117 +50,117 @@
                         <Font name="Arial Black" size="20.0" />
                     </font>
                 </Label>
-                <CheckBox layoutX="30.0" layoutY="191.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="116.0" text="Ngising">
+                <CheckBox fx:id="check1" selected="true" layoutX="30.0" layoutY="191.0" mnemonicParsing="false" onAction="#checkDone" prefHeight="19.0" prefWidth="116.0" text="Ngising">
                     <font>
                         <Font name="BellGothicStd-Bold" size="14.0" />
                     </font>
                 </CheckBox>
-                <CheckBox layoutX="30.0" layoutY="220.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="116.0" text="Mangan">
+                <CheckBox fx:id="check2" selected="true" layoutX="30.0" layoutY="220.0" mnemonicParsing="false" onAction="#checkDone" prefHeight="19.0" prefWidth="116.0" text="Mangan">
                     <font>
                         <Font name="BellGothicStd-Bold" size="14.0" />
                     </font>
                 </CheckBox>
-                <CheckBox layoutX="30.0" layoutY="251.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="116.0" text="Turu">
+                <CheckBox fx:id="check3" layoutX="30.0" layoutY="251.0" mnemonicParsing="false" onAction="#checkDone" prefHeight="19.0" prefWidth="116.0" text="Turu">
                     <font>
                         <Font name="BellGothicStd-Bold" size="14.0" />
                     </font>
                 </CheckBox>
-                <CheckBox layoutX="30.0" layoutY="282.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="116.0" text="AI">
+                <CheckBox fx:id="check4" layoutX="30.0" layoutY="282.0" mnemonicParsing="false" onAction="#checkDone" prefHeight="19.0" prefWidth="116.0" text="AI">
                     <font>
                         <Font name="BellGothicStd-Bold" size="14.0" />
                     </font>
                 </CheckBox>
-                <CheckBox layoutX="30.0" layoutY="313.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="116.0" text="Mini Project">
+                <CheckBox fx:id="check5" layoutX="30.0" layoutY="313.0" mnemonicParsing="false" onAction="#checkDone" prefHeight="19.0" prefWidth="116.0" text="Mini Project">
                     <font>
                         <Font name="BellGothicStd-Bold" size="14.0" />
                     </font>
                 </CheckBox>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="154.0" layoutY="193.0" prefHeight="15.0" prefWidth="63.0" text="Done" textAlignment="CENTER" textFill="#22970b">
+                <Label fx:id="progress1" alignment="CENTER" contentDisplay="CENTER" layoutX="154.0" layoutY="193.0" prefHeight="15.0" prefWidth="63.0" text="Done" textAlignment="CENTER" textFill="#22970b">
                     <font>
                         <Font name="BellGothicStd-Black" size="12.0" />
                     </font>
                 </Label>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="154.0" layoutY="223.0" prefHeight="9.0" prefWidth="63.0" text="Done" textAlignment="CENTER" textFill="#22970b">
+                <Label fx:id="progress2" alignment="CENTER" contentDisplay="CENTER" layoutX="154.0" layoutY="223.0" prefHeight="9.0" prefWidth="63.0" text="Done" textAlignment="CENTER" textFill="#22970b">
                     <font>
                         <Font name="BellGothicStd-Black" size="12.0" />
                     </font>
                 </Label>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="154.0" layoutY="254.0" prefHeight="8.0" prefWidth="63.0" text="In Progress" textAlignment="CENTER" textFill="#f20000">
+                <Label fx:id="progress3" alignment="CENTER" contentDisplay="CENTER" layoutX="154.0" layoutY="254.0" prefHeight="8.0" prefWidth="63.0" text="In Progress" textAlignment="CENTER" textFill="#f20000">
                     <font>
                         <Font name="BellGothicStd-Black" size="12.0" />
                     </font>
                 </Label>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="154.0" layoutY="285.0" prefHeight="6.0" prefWidth="63.0" text="In Progress" textAlignment="CENTER" textFill="#f20000">
+                <Label fx:id="progress4" alignment="CENTER" contentDisplay="CENTER" layoutX="154.0" layoutY="285.0" prefHeight="6.0" prefWidth="63.0" text="In Progress" textAlignment="CENTER" textFill="#f20000">
                     <font>
                         <Font name="BellGothicStd-Black" size="12.0" />
                     </font>
                 </Label>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="154.0" layoutY="316.0" prefHeight="8.0" prefWidth="63.0" text="In Progress" textAlignment="CENTER" textFill="#f20000">
+                <Label fx:id="progress5" alignment="CENTER" contentDisplay="CENTER" layoutX="154.0" layoutY="316.0" prefHeight="8.0" prefWidth="63.0" text="In Progress" textAlignment="CENTER" textFill="#f20000">
                     <font>
                         <Font name="BellGothicStd-Black" size="12.0" />
                     </font>
                 </Label>
-                <Button fx:id="btn1" alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="188.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="19.0" text="📝" textAlignment="CENTER">
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="188.0" mnemonicParsing="false" onAction="#onEdit" prefHeight="25.0" prefWidth="19.0" text="📝" textAlignment="CENTER">
                     <font>
                         <Font name="Arial Black" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btn11" alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="218.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="22.0" text="📝" textAlignment="CENTER">
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="218.0" mnemonicParsing="false" onAction="#onEdit" prefHeight="25.0" prefWidth="22.0" text="📝" textAlignment="CENTER">
                     <font>
                         <Font name="Arial Black" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btn111" alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="249.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="22.0" text="📝" textAlignment="CENTER">
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="249.0" mnemonicParsing="false" onAction="#onEdit" prefHeight="25.0" prefWidth="22.0" text="📝" textAlignment="CENTER">
                     <font>
                         <Font name="Arial Black" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btn1111" alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="280.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="22.0" text="📝" textAlignment="CENTER">
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="280.0" mnemonicParsing="false" onAction="#onEdit" prefHeight="25.0" prefWidth="22.0" text="📝" textAlignment="CENTER">
                     <font>
                         <Font name="Arial Black" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btn11111" alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="311.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="22.0" text="📝" textAlignment="CENTER">
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="311.0" mnemonicParsing="false" onAction="#onEdit" prefHeight="25.0" prefWidth="22.0" text="📝" textAlignment="CENTER">
                     <font>
                         <Font name="Arial Black" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btn12" alignment="CENTER" contentDisplay="CENTER" layoutX="261.0" layoutY="188.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="19.0" text="❌" textAlignment="CENTER" textFill="#f20000">
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="261.0" layoutY="188.0" mnemonicParsing="false" onAction="#onDelete" prefHeight="25.0" prefWidth="19.0" text="❌" textAlignment="CENTER" textFill="#f20000">
                     <font>
                         <Font name="Arial Black" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btn121" alignment="CENTER" contentDisplay="CENTER" layoutX="261.0" layoutY="218.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="19.0" text="❌" textAlignment="CENTER" textFill="#f20000">
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="261.0" layoutY="218.0" mnemonicParsing="false" onAction="#onDelete" prefHeight="25.0" prefWidth="19.0" text="❌" textAlignment="CENTER" textFill="#f20000">
                     <font>
                         <Font name="Arial Black" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btn122" alignment="CENTER" contentDisplay="CENTER" layoutX="261.0" layoutY="249.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="19.0" text="❌" textAlignment="CENTER" textFill="#f20000">
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="261.0" layoutY="249.0" mnemonicParsing="false" onAction="#onDelete" prefHeight="25.0" prefWidth="19.0" text="❌" textAlignment="CENTER" textFill="#f20000">
                     <font>
                         <Font name="Arial Black" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btn1221" alignment="CENTER" contentDisplay="CENTER" layoutX="261.0" layoutY="280.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="19.0" text="❌" textAlignment="CENTER" textFill="#f20000">
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="261.0" layoutY="280.0" mnemonicParsing="false" onAction="#onDelete" prefHeight="25.0" prefWidth="19.0" text="❌" textAlignment="CENTER" textFill="#f20000">
                     <font>
                         <Font name="Arial Black" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btn12211" alignment="CENTER" contentDisplay="CENTER" layoutX="261.0" layoutY="311.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="19.0" text="❌" textAlignment="CENTER" textFill="#f20000">
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="261.0" layoutY="311.0" mnemonicParsing="false" onAction="#onDelete" prefHeight="25.0" prefWidth="19.0" text="❌" textAlignment="CENTER" textFill="#f20000">
                     <font>
                         <Font name="Arial Black" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btn2" alignment="CENTER" contentDisplay="CENTER" layoutX="186.0" layoutY="96.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="22.0" text="🌗" textAlignment="CENTER">
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="186.0" layoutY="96.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="22.0" text="🌗" textAlignment="CENTER">
                     <font>
                         <Font name="Arial Black" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btn21" alignment="CENTER" contentDisplay="CENTER" layoutX="261.0" layoutY="96.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="22.0" text="📥" textAlignment="CENTER">
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="261.0" layoutY="96.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="22.0" text="📥" textAlignment="CENTER">
                     <font>
                         <Font name="Arial Black" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btn22" alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="96.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="22.0" text="📤" textAlignment="CENTER">
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="96.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="22.0" text="📤" textAlignment="CENTER">
                     <font>
                         <Font name="Arial Black" size="12.0" />
                     </font>
@@ -167,7 +173,7 @@
                         <Font name="Arial Black" size="40.0" />
                     </font>
                 </Label>
-                <Label layoutX="102.0" layoutY="47.0" prefHeight="49.0" prefWidth="109.0" text="User" textAlignment="CENTER">
+                <Label fx:id="user" layoutX="102.0" layoutY="47.0" prefHeight="49.0" prefWidth="109.0" text="User" textAlignment="CENTER">
                     <font>
                         <Font name="Arial Black" size="30.0" />
                     </font>
@@ -177,7 +183,7 @@
                         <Font name="BellGothicStd-Black" size="12.0" />
                     </font>
                 </Label>
-                <TextField layoutX="35.0" layoutY="143.0" prefHeight="25.0" prefWidth="194.0" text="Search Task/Category" />
+                <TextField layoutX="35.0" layoutY="143.0" prefHeight="25.0" prefWidth="167.0" promptText="Search Task/Category" />
                 <Label fx:id="today" contentDisplay="CENTER" layoutX="37.0" layoutY="193.0" prefHeight="20.0" prefWidth="194.0" text="☆ Today" textAlignment="CENTER">
                     <font>
                         <Font name="BellGothicStd-Black" size="16.0" />
@@ -203,6 +209,11 @@
                         <Font name="BellGothicStd-Black" size="16.0" />
                     </font>
                 </Label>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="211.0" layoutY="143.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="22.0" text="🔍" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Button>
             </children></Pane>
     </children>
 </GridPane>
