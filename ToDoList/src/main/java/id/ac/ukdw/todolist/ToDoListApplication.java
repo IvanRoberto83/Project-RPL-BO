@@ -12,6 +12,7 @@ import java.io.IOException;
 
 public class ToDoListApplication extends Application {
     private static Stage primaryStage;
+    private static String loggedInUsername;
 
     @Override
     public void start(Stage stage) {
@@ -35,6 +36,14 @@ public class ToDoListApplication extends Application {
         primaryStage.setTitle(title);
         primaryStage.sizeToScene();
         primaryStage.setResizable(isResizeable);
+    }
+
+    public static void setLoggedInUsername(String username) {
+        loggedInUsername = username;
+    }
+
+    public static String getLoggedInUsername() {
+        return loggedInUsername;
     }
 
     static {

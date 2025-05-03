@@ -1,13 +1,18 @@
 package id.ac.ukdw.todolist.Menu;
 
+import id.ac.ukdw.todolist.ToDoListApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
-public class ToDoMenuController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ToDoMenuController implements Initializable {
 
     @FXML
     private Pane bgKanan;
@@ -56,6 +61,14 @@ public class ToDoMenuController {
 
     @FXML
     private Label user;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        String loggedInUsername = ToDoListApplication.getLoggedInUsername();
+        if (loggedInUsername != null && !loggedInUsername.isEmpty()) {
+            user.setText(loggedInUsername);
+        }
+    }
 
     @FXML
     void checkDone(ActionEvent event) {
@@ -114,5 +127,4 @@ public class ToDoMenuController {
     void onEdit(ActionEvent event) {
 
     }
-
 }
