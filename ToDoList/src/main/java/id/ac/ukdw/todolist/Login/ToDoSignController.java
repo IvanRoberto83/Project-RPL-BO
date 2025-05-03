@@ -149,6 +149,7 @@ public class ToDoSignController {
         try {
             if (validateUser(username, password)) {
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Login Successful", "You have successfully logged in.");
+                ToDoListApplication.setLoggedInUsername(username);
                 ToDoListApplication.setRoot("Main/ToDoToday", "ToDoList", false);
             } else {
                 showAlert(Alert.AlertType.ERROR, "Error", "Login Failed", "Invalid username or password.");
