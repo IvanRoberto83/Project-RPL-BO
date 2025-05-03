@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.todolist.Menu.ToDoMenuController">
+    <stylesheets>
+        <URL value="@../../styles/TodayStyle.css" />
+    </stylesheets>
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="10.0" prefWidth="282.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="0.0" prefWidth="25.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="344.0" minWidth="10.0" prefWidth="293.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="145.0" minHeight="10.0" prefHeight="129.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="127.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="174.0" minHeight="5.0" prefHeight="154.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="258.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <Pane fx:id="bgKanan" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowSpan="5">
+            <children>
+                <Label layoutX="30.0" layoutY="36.0" prefHeight="29.0" prefWidth="194.0" text="Create ToDoList" textAlignment="CENTER">
+                    <font>
+                        <Font name="Arial Black" size="20.0" />
+                    </font>
+                </Label>
+            <Label contentDisplay="CENTER" layoutX="30.0" layoutY="78.0" prefHeight="18.0" prefWidth="43.0" text="Name :" textAlignment="CENTER">
+               <font>
+                  <Font name="BellGothicStd-Black" size="12.0" />
+               </font>
+            </Label>
+            <TextField layoutX="30.0" layoutY="98.0" prefHeight="25.0" prefWidth="212.0" promptText="Enter the name of your Task" />
+            <Label contentDisplay="CENTER" layoutX="30.0" layoutY="132.0" prefHeight="18.0" prefWidth="70.0" text="Deadline :" textAlignment="CENTER">
+               <font>
+                  <Font name="BellGothicStd-Black" size="12.0" />
+               </font>
+            </Label>
+            <DatePicker layoutX="30.0" layoutY="152.0" promptText="Enter the Deadline" />
+            <Label contentDisplay="CENTER" layoutX="30.0" layoutY="189.0" prefHeight="18.0" prefWidth="70.0" text="Description :" textAlignment="CENTER">
+               <font>
+                  <Font name="BellGothicStd-Black" size="12.0" />
+               </font>
+            </Label>
+            <TextArea layoutX="30.0" layoutY="210.0" prefHeight="59.0" prefWidth="248.0" promptText="Enter the description of your Task" />
+            <ChoiceBox layoutX="30.0" layoutY="298.0" prefHeight="25.0" prefWidth="118.0" />
+            <Label contentDisplay="CENTER" layoutX="30.0" layoutY="278.0" prefHeight="18.0" prefWidth="70.0" text="Category :" textAlignment="CENTER">
+               <font>
+                  <Font name="BellGothicStd-Black" size="12.0" />
+               </font>
+            </Label>
+            <CheckBox layoutX="30.0" layoutY="341.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="133.0" text="Mark as Important" />
+            <Button layoutX="207.0" layoutY="337.0" mnemonicParsing="false" text="CREATE">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Button>
+            </children></Pane>
+        <Pane fx:id="bgKiri" prefHeight="200.0" prefWidth="200.0" GridPane.rowSpan="5">
+            <children>
+                <Label layoutX="34.0" layoutY="38.0" prefHeight="59.0" prefWidth="63.0" text="Hi," textAlignment="CENTER">
+                    <font>
+                        <Font name="Arial Black" size="40.0" />
+                    </font>
+                </Label>
+                <Label fx:id="user" layoutX="102.0" layoutY="47.0" prefHeight="48.0" prefWidth="109.0" text="User" textAlignment="CENTER">
+                    <font>
+                        <Font name="Arial Black" size="30.0" />
+                    </font>
+                </Label>
+                <Label contentDisplay="CENTER" layoutX="37.0" layoutY="97.0" prefHeight="18.0" prefWidth="194.0" text="Welcome back to your workspace !" textAlignment="CENTER">
+                    <font>
+                        <Font name="BellGothicStd-Black" size="12.0" />
+                    </font>
+                </Label>
+                <TextField layoutX="35.0" layoutY="143.0" prefHeight="25.0" prefWidth="167.0" promptText="Search Task/Category" />
+                <Label fx:id="today" contentDisplay="CENTER" layoutX="37.0" layoutY="193.0" prefHeight="20.0" prefWidth="194.0" text="☆ Today" textAlignment="CENTER">
+                    <font>
+                        <Font name="BellGothicStd-Black" size="16.0" />
+                    </font>
+                </Label>
+                <Label contentDisplay="CENTER" layoutX="37.0" layoutY="221.0" prefHeight="20.0" prefWidth="194.0" text="⏲ Upcoming" textAlignment="CENTER">
+                    <font>
+                        <Font name="BellGothicStd-Black" size="16.0" />
+                    </font>
+                </Label>
+                <Label contentDisplay="CENTER" layoutX="37.0" layoutY="250.0" prefHeight="20.0" prefWidth="194.0" text="⚠ Important" textAlignment="CENTER">
+                    <font>
+                        <Font name="BellGothicStd-Black" size="16.0" />
+                    </font>
+                </Label>
+                <Label contentDisplay="CENTER" layoutX="37.0" layoutY="281.0" prefHeight="20.0" prefWidth="194.0" text="📋 Category" textAlignment="CENTER">
+                    <font>
+                        <Font name="BellGothicStd-Black" size="16.0" />
+                    </font>
+                </Label>
+                <Label contentDisplay="CENTER" layoutX="37.0" layoutY="312.0" prefHeight="20.0" prefWidth="194.0" text="🚮 Trash" textAlignment="CENTER">
+                    <font>
+                        <Font name="BellGothicStd-Black" size="16.0" />
+                    </font>
+                </Label>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="211.0" layoutY="143.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="22.0" text="🔍" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Button>
+            </children></Pane>
+    </children>
+</GridPane>
