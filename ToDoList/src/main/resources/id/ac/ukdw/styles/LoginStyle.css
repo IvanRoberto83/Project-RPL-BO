@@ -1,11 +1,32 @@
-#bgKiri{
-    -fx-background-color: #FFCA08; /*Warna Kuning*/
+.loginBtn, .createBtn, .confirmBtn {
+    -fx-padding: 3;
+    -fx-background-color: #ffe3e3;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
 }
 
-#bgKanan {
-    -fx-background-color: #FFFFFF; /*Warna Putih*/
+.loginBtn:hover, .createBtn:hover, .confirmBtn:hover {
+    -fx-background-color: #e6caca;
 }
 
-#btn:hover {
-    -fx-background-color: #FFCA08; /*Warna Kuning*/
+.registerBtn, .signUpBtn {
+    -fx-text-background-color: #00bf63;
+    -fx-cursor: hand;
+    -fx-underline: true;
+}
+
+.forgotBtn {
+    -fx-text-background-color: #ff3131;
+    -fx-cursor: hand;
+    -fx-underline: true;
+}
+
+.registerBtn:hover, .signUpBtn:hover {
+    -fx-text-background-color: #00994f;
+    -fx-underline: false;
+}
+
+.forgotBtn:hover {
+    -fx-text-background-color: #cc1f1f;
+    -fx-underline: false;
 }

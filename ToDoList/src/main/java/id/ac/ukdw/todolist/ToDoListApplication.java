@@ -9,16 +9,18 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class ToDoListApplication extends Application {
     private static Stage primaryStage;
-    private static String loggedInUsername;
+    private static Map<String, Object> userData;
 
     @Override
     public void start(Stage stage) {
         primaryStage = stage;
-        primaryStage.setTitle("ToDoList");
+        primaryStage.setTitle("Login");
         primaryStage.setScene(new Scene(loadFXML("Login/ToDoLogin")));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
@@ -38,12 +40,12 @@ public class ToDoListApplication extends Application {
         primaryStage.setResizable(isResizeable);
     }
 
-    public static void setLoggedInUsername(String username) {
-        loggedInUsername = username;
+    public static void setUserData(Map<String, Object> data) {
+        userData = data;
     }
 
-    public static String getLoggedInUsername() {
-        return loggedInUsername;
+    public static Map<String, Object> getUserData() {
+        return userData;
     }
 
     static {
