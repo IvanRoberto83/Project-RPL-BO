@@ -19,12 +19,12 @@
                     <children>
                         <Label text="CREATE">
                             <font>
-                                <Font name="DM Sans Black" size="40.0" />
+                                <Font size="40.0" />
                             </font>
                         </Label>
                         <Label text="New here? Let’s get you set up!">
                             <font>
-                                <Font name="DM Sans Italic" size="14.0" />
+                                <Font size="14.0" />
                             </font>
                         </Label>
                     </children>
@@ -40,7 +40,7 @@
                     <children>
                         <Button alignment="CENTER" mnemonicParsing="false" onAction="#onCreate" prefHeight="30.0" prefWidth="145.0" styleClass="createBtn" text="Create">
                             <font>
-                                <Font name="DM Sans Regular" size="15.0" />
+                                <Font size="15.0" />
                             </font>
                         </Button>
                     </children>
@@ -50,7 +50,7 @@
                         <Label text="Already have an account?" />
                         <Label onMouseClicked="#onSignUp" styleClass="signUpBtn" text="Log in" textFill="#00bf63">
                             <font>
-                                <Font name="DM Sans Bold" size="12.0" />
+                                <Font size="12.0" />
                             </font>
                         </Label>
                     </children>

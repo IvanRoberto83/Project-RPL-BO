@@ -87,6 +87,13 @@ public class ToDoAuthController {
             return;
         }
 
+        if (username.length() > 9) {
+            showAlert(Alert.AlertType.ERROR, "Error",
+                    "Registration Failed",
+                    "Username must be less than 8 characters");
+            return;
+        }
+
         try {
             boolean success = registerUser(username, password);
             if (success) {

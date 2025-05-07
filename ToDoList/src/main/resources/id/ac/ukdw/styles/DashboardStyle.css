@@ -1,0 +1,19 @@
+.searchBox {
+    -fx-background-color: #C499B5;
+    -fx-text-fill: #ffe3e3;
+    -fx-prompt-text-fill: #ffe3e3;
+    -fx-padding: 5 10;
+    -fx-border-color: #ffe3e3;
+    -fx-border-radius: 10;
+}
+
+.logoutBtn {
+    -fx-background-color: #fefefe;
+    -fx-background-radius: 15;
+    -fx-padding: 5 15;
+}
+
+.mainPanel {
+    -fx-background-color: #ffe3e3;
+    -fx-background-radius: 20;
+}

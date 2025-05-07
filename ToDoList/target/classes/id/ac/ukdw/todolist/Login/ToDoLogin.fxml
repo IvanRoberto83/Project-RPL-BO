@@ -19,12 +19,12 @@
                <children>
                   <Label text="LOGIN">
                      <font>
-                        <Font name="DM Sans Black" size="40.0" />
+                        <Font size="40.0" />
                      </font>
                   </Label>
                   <Label text="Good to see you again!">
                      <font>
-                        <Font name="DM Sans Italic" size="14.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
                </children>
@@ -37,14 +37,14 @@
             <PasswordField fx:id="txtPass" promptText="Password" style="-fx-padding: 10; -fx-background-radius: 10;" />
             <Label alignment="CENTER" onMouseClicked="#onForgotPassword" styleClass="forgotBtn" text="Forgot Password?" textFill="#ff3131">
                <font>
-                  <Font name="DM Sans Bold" size="12.0" />
+                  <Font size="12.0" />
                </font>
             </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button alignment="CENTER" mnemonicParsing="false" onAction="#onLogin" prefHeight="30.0" prefWidth="145.0" styleClass="loginBtn" text="Login">
                      <font>
-                        <Font name="DM Sans Regular" size="15.0" />
+                        <Font size="15.0" />
                      </font>
                   </Button>
                </children>
@@ -54,7 +54,7 @@
                   <Label text="Don't have an account?" />
                   <Label onMouseClicked="#onRegister" styleClass="registerBtn" text="Sign Up" textFill="#00bf63">
                      <font>
-                        <Font name="DM Sans Bold" size="12.0" />
+                        <Font size="12.0" />
                      </font>
                   </Label>
                   <Label text="now" />

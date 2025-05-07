@@ -17,12 +17,12 @@
                     <children>
                         <Label text="FORGOT">
                             <font>
-                                <Font name="DM Sans Black" size="40.0" />
+                                <Font size="40.0" />
                             </font>
                         </Label>
                         <Label text="Let’s reset your password.">
                             <font>
-                                <Font name="DM Sans Italic" size="14.0" />
+                                <Font size="14.0" />
                             </font>
                         </Label>
                     </children>
@@ -37,7 +37,7 @@
                     <children>
                         <Button alignment="CENTER" mnemonicParsing="false" onAction="#onConfirm" prefHeight="30.0" prefWidth="145.0" styleClass="confirmBtn" text="Confirm">
                             <font>
-                                <Font name="DM Sans Regular" size="15.0" />
+                                <Font size="15.0" />
                             </font>
                         </Button>
                     </children>
