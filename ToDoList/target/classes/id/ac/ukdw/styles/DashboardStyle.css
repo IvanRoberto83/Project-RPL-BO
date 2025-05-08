@@ -1,31 +1,242 @@
-.searchBox {
+.header {
     -fx-background-color: #C499B5;
-    -fx-text-fill: #ffe3e3;
-    -fx-prompt-text-fill: #ffe3e3;
     -fx-padding: 5 10;
-    -fx-border-color: #ffe3e3;
-    -fx-border-radius: 10;
 }
 
+.searchBox {
+    -fx-background-color: #C499B5;
+    -fx-text-fill: #FFE3E3;
+    -fx-prompt-text-fill: #FFE3E3;
+    -fx-padding: 5 10;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: #FFE3E3;
+}
+
+/* Button Styles */
 .btnTasks {
     -fx-background-color: #ffe3e3;
     -fx-background-radius: 15;
-    -fx-padding: 5 25;
+    -fx-padding: 5 20;
+    -fx-text-fill: #333;
+    -fx-cursor: hand;
+}
+
+.btnTasks:hover {
+    -fx-background-color: #dba8c3;
+    -fx-text-fill: white;
 }
 
 .active {
     -fx-background-color: #C499B5;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-padding: 5 25;
 }
 
-.logoutBtn {
-    -fx-background-color: #fefefe;
+.logoutBtn, .themeBtn {
+    -fx-background-color: white;
     -fx-background-radius: 15;
     -fx-padding: 5 15;
+    -fx-text-fill: #333;
+    -fx-cursor: hand;
 }
 
+.logoutBtn:hover, .themeBtn:hover {
+    -fx-background-color: #dba8c3;
+    -fx-text-fill: white;
+}
+
+/* Main Panel */
 .mainPanel {
-    -fx-background-color: #ffe3e3;
+    -fx-background-color: #FFE3E3;
     -fx-background-radius: 20;
+}
+
+/* Section Labels */
+.dateLabel {
+    -fx-text-fill: #111;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
+.sectionLabel {
+    -fx-text-fill: #111;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-underline: true;
+}
+
+/* Scroll Panes */
+.scrollPanel, .contentScrollPane, .formScrollPane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.scrollPanel .viewport, .contentScrollPane .viewport, .formScrollPane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scrollPanelVbox, .taskListVbox {
+    -fx-background-color: transparent;
+    -fx-padding: 5;
+    -fx-spacing: 10;
+}
+
+/* Hide scroll bar */
+.scrollPanel .scroll-bar:vertical, .contentScrollPane .scroll-bar:vertical, .formScrollPane .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Task Cards */
+.taskCard {
+    -fx-border-color: #C499B5;
+    -fx-border-radius: 15;
+    -fx-padding: 10 15;
+}
+
+.taskTitle {
+    -fx-text-fill: #111;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-underline: true;
+}
+
+.taskDescription {
+    -fx-wrap-text: true;
+    -fx-text-fill: #555;
+}
+
+/* Status Labels */
+.statusInProgress {
+    -fx-text-fill: #2196F3;
+    -fx-font-weight: bold;
+}
+
+.statusNotStarted {
+    -fx-text-fill: #F44336;
+    -fx-font-weight: bold;
+}
+
+.statusCompleted {
+    -fx-text-fill: #4CAF50;
+    -fx-font-weight: bold;
+}
+
+/* Feature Cards */
+.featureCard {
+    -fx-border-color: #C499B5;
+    -fx-border-radius: 15;
+    -fx-padding: 15;
+}
+
+.featureTitle {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: #333;
+}
+
+/* Form Elements */
+TextField, TextArea, ComboBox, DatePicker {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+}
+
+TextField:focused, TextArea:focused, ComboBox:focused, DatePicker:focused {
+    -fx-border-color: #C499B5;
+}
+
+/* Buttons */
+.primaryBtn {
+    -fx-background-color: #C499B5;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 8 20;
+    -fx-cursor: hand;
+}
+
+.secondaryBtn {
+    -fx-background-color: #ddd;
+    -fx-text-fill: #333;
+    -fx-background-radius: 10;
+    -fx-padding: 8 20;
+    -fx-cursor: hand;
+}
+
+.featureBtn {
+    -fx-background-color: #C499B5;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 8 25;
+    -fx-cursor: hand;
+}
+
+.primaryBtn:hover, .featureBtn:hover {
+    -fx-background-color: #a5788e;
+}
+
+.secondaryBtn:hover {
+    -fx-background-color: #ccc;
+}
+
+/* Priority Flags */
+.priorityFlag {
+    -fx-font-size: 16px;
+}
+
+.titleCreateTask, .deadlineCreateTask, .descCreateTask {
+    -fx-background-color: transparent;
+    -fx-prompt-text-fill: #C499B5;
+    -fx-border-color: #C499B5;
+    -fx-control-inner-background: transparent;
+}
+
+.descCreateTask .viewport {
+    -fx-background-color: transparent;
+}
+
+.selectComboBox {
+    -fx-border-color: #C499B5;
+    -fx-border-width: 1px;
+    -fx-background-color: transparent;
+    -fx-text-fill: #C499B5;
+    -fx-prompt-text-fill: #C499B5;
+}
+
+.selectComboBox .arrow {
+    -fx-background-color: #C499B5;
+}
+
+.selectComboBox .list-cell {
+    -fx-text-fill: #C499B5;
+    -fx-background-color: transparent;
+}
+
+.selectComboBox .list-cell:hover,
+.selectComboBox .list-cell:focused,
+.selectComboBox .list-cell:filled:selected {
+    -fx-text-fill: #C499B5;
+}
+
+/* Date Picker */
+.datePicker {
+    -fx-pref-width: 40px;
+    -fx-pref-height: 30px;
+    -fx-padding: 2;
+    -fx-background-color: transparent;
+}
+
+.datePicker .arrow-button {
+    -fx-background-color: #C499B5;
+    -fx-background-radius: 0 5 5 0;
+}
+
+.datePicker .arrow-button .arrow {
+    -fx-background-color: white;
 }

@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 public class ToDoDashboardController implements Initializable {
     // ========== UI COMPONENT DECLARATIONS ==========
     @FXML public Label userText;
-    @FXML public Label timeToday;
+    @FXML public Label dateLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -26,6 +26,6 @@ public class ToDoDashboardController implements Initializable {
         LocalDate localDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy", new Locale("id", "ID"));
         String formattedDate = localDate.format(formatter);
-        timeToday.setText(formattedDate);
+        dateLabel.setText(formattedDate);
     }
 }

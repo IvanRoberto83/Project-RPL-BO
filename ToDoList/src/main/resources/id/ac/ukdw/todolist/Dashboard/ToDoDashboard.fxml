@@ -3,8 +3,14 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,18 +19,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../../styles/DashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.todolist.Dashboard.ToDoDashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../../styles/DashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.todolist.Dashboard.ToDoDashboardController">
    <children>
-      <HBox prefHeight="40.0" prefWidth="700.0" spacing="20.0" style="-fx-background-color: C499B5;">
+      <HBox prefHeight="40.0" prefWidth="900.0" spacing="20.0" styleClass="header">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="2.0" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="2.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label text="Welcome," textFill="#f6cfd8">
+                  <Label styleClass="welcomeText" text="Welcome," textFill="#ffe3e3">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="userText" text="Username" textFill="#f6cfd8">
+                  <Label fx:id="userText" styleClass="welcomeText" text="User" textFill="#ffe3e3">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -32,7 +38,7 @@
                         <Insets right="3.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="👋" textFill="#f6cfd8">
+                  <Label styleClass="welcomeText" text="👋" textFill="#ffe3e3">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -41,16 +47,13 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                <children>
-                  <TextField focusTraversable="false" promptText="🔍 Search Tasks..." styleClass="searchBox" />
+                  <TextField fx:id="searchField" focusTraversable="false" promptText="🔍 Search Tasks..." styleClass="searchBox" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Button mnemonicParsing="false" styleClass="logoutBtn" text="🚪 Log Out" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
+                  <Button fx:id="themeToggleBtn" mnemonicParsing="false" styleClass="themeBtn" text="🌓 Theme" />
+                  <Button fx:id="logOutBtn" mnemonicParsing="false" styleClass="logoutBtn" text="🚪 Log Out" />
                </children>
             </HBox>
          </children>
@@ -58,32 +61,30 @@
             <Insets left="10.0" right="10.0" />
          </padding>
       </HBox>
-      <GridPane alignment="CENTER" styleClass="mainPanel" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <GridPane styleClass="mainPanel" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
+            <!-- Left Panel - Navigation -->
             <VBox prefHeight="150.0" prefWidth="190.0" spacing="5.0">
                <children>
-                  <Label fx:id="timeToday" text="Senin, 01 Januari 1990">
+                  <Label fx:id="dateLabel" styleClass="dateLabel" text="Sunday, 04 April 1998">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label style="-fx-underline: true;" text="Tasks">
+                  <Label styleClass="sectionLabel" text="Tasks">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" text="📅 Today">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
+                  <Button fx:id="todayBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" text="⭐ Today">
                      <styleClass>
                         <String fx:value="btnTasks" />
                         <String fx:value="active" />
@@ -92,42 +93,240 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" styleClass="btnTasks" text="📶 Status">
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
+                  <Button fx:id="statusBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" styleClass="btnTasks" text="✓ Status">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" styleClass="btnTasks" text="📌 Important">
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
+                  <Button fx:id="importantBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" styleClass="btnTasks" text="⚠ Important">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" styleClass="btnTasks" text="🗂 Category">
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
+                  <Button fx:id="categoryBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" styleClass="btnTasks" text="▶ Category">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
+                  <Label styleClass="sectionLabel" text="Finished">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ScrollPane fx:id="finishedTasksPane" fitToWidth="true" styleClass="scrollPanel" VBox.vgrow="ALWAYS">
+                     <content>
+                        <VBox fx:id="finishedTasksContainer" spacing="10.0" styleClass="scrollPanelVbox">
+                           <!-- Finished tasks will be added here dynamically -->
+                           <children>
+                              <!-- Example finished task -->
+                              <VBox styleClass="taskCard">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <Label styleClass="taskTitle" text="Title To Do 6" />
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../assets/complete.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </HBox>
+                                    <Label styleClass="taskDescription" text="Description to do - Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo provident quos porro..." wrapText="true" />
+                                    <HBox spacing="5.0">
+                                       <children>
+                                          <Label text="Status:" />
+                                          <Label styleClass="statusCompleted" text="Completed" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
                </children>
                <GridPane.margin>
                   <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </VBox>
+
+            <!-- Middle Panel - Task List -->
+            <ScrollPane fitToWidth="true" styleClass="contentScrollPane" GridPane.columnIndex="1">
+               <content>
+                  <VBox fx:id="taskListContainer" spacing="10.0" styleClass="taskListVbox">
+                     <!-- Tasks will be added here dynamically -->
+                     <!-- Example task 1 -->
+                     <children>
+                        <VBox styleClass="taskCard">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                 <children>
+                                    <Label styleClass="taskTitle" text="Title To Do 1" />
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../assets/ongoing.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                              <Label styleClass="taskDescription" text="Description to do - Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo provident quos porro..." wrapText="true" />
+                              <HBox spacing="5.0">
+                                 <children>
+                                    <Label text="Status:" />
+                                    <Label styleClass="statusInProgress" text="In Progress" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+
+                        <!-- Example task 2 -->
+                        <VBox styleClass="taskCard">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                 <children>
+                                    <Label styleClass="taskTitle" text="Title To Do 2" />
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../assets/not_finish.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                              <Label styleClass="taskDescription" text="Description to do - Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo provident quos porro..." wrapText="true" />
+                              <HBox spacing="5.0">
+                                 <children>
+                                    <Label styleClass="status" text="Status:" />
+                                    <Label styleClass="statusNotStarted" text="Not Started" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+
+                        <!-- Example task 3 -->
+                        <VBox styleClass="taskCard">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                 <children>
+                                    <Label styleClass="taskTitle" text="Title To Do 3" />
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../assets/ongoing.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                              <Label styleClass="taskDescription" text="Description to do - Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo provident quos porro..." wrapText="true" />
+                              <HBox spacing="5.0">
+                                 <children>
+                                    <Label styleClass="status" text="Status:" />
+                                    <Label styleClass="statusInProgress" text="In Progress" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+
+                        <!-- Example task 4 -->
+                        <VBox styleClass="taskCard">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                 <children>
+                                    <Label styleClass="taskTitle" text="Title To Do 4" />
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../assets/not_finish.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                              <Label styleClass="taskDescription" text="Description to do - Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo provident quos porro..." wrapText="true" />
+                              <HBox spacing="5.0">
+                                 <children>
+                                    <Label text="Status:" />
+                                    <Label styleClass="statusNotStarted" text="Not Started" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </content>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </ScrollPane>
+
+            <!-- Right Panel - Import/Export and Create Task -->
+            <VBox spacing="15.0" GridPane.columnIndex="2">
+               <children>
+                  <!-- Import/Export Section -->
+                  <VBox styleClass="featureCard">
+                     <children>
+                        <Label styleClass="featureTitle" text="Import/Export Task" />
+                        <HBox alignment="CENTER" spacing="10.0">
+                           <children>
+                              <Button fx:id="importBtn" styleClass="featureBtn" text="⬆ IMPORT" />
+                              <Button fx:id="exportBtn" styleClass="featureBtn" text="⬇ EXPORT" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Button fx:id="downloadTemplateBtn" prefHeight="33.0" prefWidth="247.0" styleClass="secondaryBtn" text="⬇ DOWNLOAD TEMPLATE" />
+                     </children>
+                  </VBox>
+
+                  <!-- Create Task Section -->
+                  <VBox styleClass="featureCard" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="featureTitle" text="Create Task" />
+                        <ScrollPane fitToWidth="true" styleClass="formScrollPane" VBox.vgrow="ALWAYS">
+                           <content>
+                              <VBox spacing="10.0">
+                                 <children>
+                                    <Label text="Title:" />
+                                    <TextField fx:id="taskTitleField" promptText="Enter your Task's name here" styleClass="titleCreateTask" />
+
+                                    <Label text="Due Date:" />
+                                    <HBox alignment="CENTER_LEFT" spacing="5.0">
+                                       <children>
+                                          <TextField fx:id="dueDateField" promptText="Enter the Deadline" styleClass="deadlineCreateTask" HBox.hgrow="ALWAYS" />
+                                          <DatePicker fx:id="dueDatePicker" prefHeight="31.0" prefWidth="78.0" styleClass="datePicker" />
+                                       </children>
+                                    </HBox>
+
+                                    <Label text="Description:" />
+                                    <TextArea fx:id="taskDescriptionField" prefHeight="120.0" promptText="Enter the Description of your Task" styleClass="descCreateTask" wrapText="true" />
+
+                                    <Label text="Category:" />
+                                    <ComboBox fx:id="categoryComboBox" prefWidth="150.0" promptText="Select Category" styleClass="selectComboBox" />
+
+                                    <Label text="Priority:" />
+                                    <ComboBox fx:id="priorityComboBox" prefWidth="150.0" promptText="Select Priority" styleClass="selectComboBox" />
+
+                                    <HBox alignment="CENTER" spacing="10.0">
+                                       <children>
+                                          <Button fx:id="createTaskBtn" styleClass="primaryBtn" text="CREATE TASK" />
+                                          <Button fx:id="resetFormBtn" styleClass="secondaryBtn" text="RESET" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="15.0" top="10.0" />
                </GridPane.margin>
             </VBox>
          </children>
