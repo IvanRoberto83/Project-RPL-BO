@@ -7,6 +7,18 @@
     -fx-border-radius: 10;
 }
 
+.btnTasks {
+    -fx-background-color: #ffe3e3;
+    -fx-background-radius: 15;
+    -fx-padding: 5 25;
+}
+
+.active {
+    -fx-background-color: #C499B5;
+    -fx-font-weight: bold;
+    -fx-padding: 5 25;
+}
+
 .logoutBtn {
     -fx-background-color: #fefefe;
     -fx-background-radius: 15;

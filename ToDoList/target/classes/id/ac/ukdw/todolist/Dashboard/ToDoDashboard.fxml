@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../../styles/DashboardStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.todolist.Dashboard.ToDoDashboardController">
@@ -54,14 +58,79 @@
             <Insets left="10.0" right="10.0" />
          </padding>
       </HBox>
-      <Pane layoutX="10.0" layoutY="50.0" prefHeight="440.0" prefWidth="680.0" styleClass="mainPanel" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+      <GridPane alignment="CENTER" styleClass="mainPanel" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <Label fx:id="timeToday" layoutX="15.0" layoutY="13.0" text="Senin, 01 Januari 1990">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
+            <VBox prefHeight="150.0" prefWidth="190.0" spacing="5.0">
+               <children>
+                  <Label fx:id="timeToday" text="Senin, 01 Januari 1990">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-underline: true;" text="Tasks">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" text="📅 Today">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <styleClass>
+                        <String fx:value="btnTasks" />
+                        <String fx:value="active" />
+                     </styleClass>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" styleClass="btnTasks" text="📶 Status">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" styleClass="btnTasks" text="📌 Important">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" styleClass="btnTasks" text="🗂 Category">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </VBox>
          </children>
-      </Pane>
+      </GridPane>
    </children>
 </AnchorPane>
