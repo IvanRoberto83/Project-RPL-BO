@@ -1,32 +1,45 @@
-.loginBtn, .createBtn, .confirmBtn {
+/* =========== */
+/* Auth Buttons */
+/* =========== */
+
+.loginBtn,
+.createBtn,
+.confirmBtn {
     -fx-padding: 3;
     -fx-background-color: #ffe3e3;
     -fx-background-radius: 10;
     -fx-cursor: hand;
 }
 
-.loginBtn:hover, .createBtn:hover, .confirmBtn:hover {
+.loginBtn:hover,
+.createBtn:hover,
+.confirmBtn:hover {
     -fx-background-color: #e6caca;
 }
 
-.registerBtn, .signUpBtn {
-    -fx-text-background-color: #00bf63;
-    -fx-cursor: hand;
-    -fx-underline: true;
-}
-
+.registerBtn,
+.signUpBtn,
 .forgotBtn {
-    -fx-text-background-color: #ff3131;
     -fx-cursor: hand;
     -fx-underline: true;
 }
 
-.registerBtn:hover, .signUpBtn:hover {
-    -fx-text-background-color: #00994f;
+.registerBtn,
+.signUpBtn {
+    -fx-text-fill: #00bf63;
+}
+
+.registerBtn:hover,
+.signUpBtn:hover {
+    -fx-text-fill: #00994f;
     -fx-underline: false;
 }
 
+.forgotBtn {
+    -fx-text-fill: #ff3131;
+}
+
 .forgotBtn:hover {
-    -fx-text-background-color: #cc1f1f;
+    -fx-text-fill: #cc1f1f;
     -fx-underline: false;
 }

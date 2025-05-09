@@ -16,6 +16,10 @@ public class ToDoDashboardController implements Initializable {
     // ========== UI COMPONENT DECLARATIONS ==========
     @FXML public Label userText;
     @FXML public Label dateLabel;
+    @FXML public Button statusBtn;
+    @FXML public Button todayBtn;
+    @FXML public Button importantBtn;
+    @FXML public Button categoryBtn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -27,5 +31,30 @@ public class ToDoDashboardController implements Initializable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy", new Locale("id", "ID"));
         String formattedDate = localDate.format(formatter);
         dateLabel.setText(formattedDate);
+        setupNavButtons();
+    }
+
+    private void setupNavButtons() {
+        todayBtn.setOnAction(e -> setActiveButton(todayBtn));
+        statusBtn.setOnAction(e -> setActiveButton(statusBtn));
+        importantBtn.setOnAction(e -> setActiveButton(importantBtn));
+        categoryBtn.setOnAction(e -> setActiveButton(categoryBtn));
+
+        setActiveButton(todayBtn);
+    }
+
+    private void setActiveButton(Button activeBtn) {
+        removeActiveStyle(todayBtn);
+        removeActiveStyle(statusBtn);
+        removeActiveStyle(importantBtn);
+        removeActiveStyle(categoryBtn);
+
+        if (activeBtn.getStyleClass().contains("btnTasks")) {
+            activeBtn.getStyleClass().add("active");
+        }
+    }
+
+    private void removeActiveStyle(Button btn) {
+        btn.getStyleClass().remove("active");
     }
 }

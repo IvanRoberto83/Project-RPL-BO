@@ -3,6 +3,7 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -52,7 +53,6 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button fx:id="themeToggleBtn" mnemonicParsing="false" styleClass="themeBtn" text="🌓 Theme" />
                   <Button fx:id="logOutBtn" mnemonicParsing="false" styleClass="logoutBtn" text="🚪 Log Out" />
                </children>
             </HBox>
@@ -127,6 +127,29 @@
                                     <HBox alignment="CENTER_LEFT" spacing="10.0">
                                        <children>
                                           <Label styleClass="taskTitle" text="Title To Do 6" />
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../assets/complete.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </HBox>
+                                    <Label styleClass="taskDescription" text="Description to do - Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo provident quos porro..." wrapText="true" />
+                                    <HBox spacing="5.0">
+                                       <children>
+                                          <Label text="Status:" />
+                                          <Label styleClass="statusCompleted" text="Completed" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+
+                              <!-- Example finished task 2 -->
+                              <VBox styleClass="taskCard">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <Label styleClass="taskTitle" text="Title To Do 7" />
                                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../../assets/complete.png" />
@@ -250,6 +273,29 @@
                               </HBox>
                            </children>
                         </VBox>
+
+                        <!-- Example task 5 -->
+                        <VBox styleClass="taskCard">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                 <children>
+                                    <Label styleClass="taskTitle" text="Title To Do 5" />
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../assets/not_finish.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                              <Label styleClass="taskDescription" text="Description to do - Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo provident quos porro..." wrapText="true" />
+                              <HBox spacing="5.0">
+                                 <children>
+                                    <Label text="Status:" />
+                                    <Label styleClass="statusNotStarted" text="Not Started" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
                </content>
@@ -292,19 +338,20 @@
                                     <Label text="Due Date:" />
                                     <HBox alignment="CENTER_LEFT" spacing="5.0">
                                        <children>
-                                          <TextField fx:id="dueDateField" promptText="Enter the Deadline" styleClass="deadlineCreateTask" HBox.hgrow="ALWAYS" />
-                                          <DatePicker fx:id="dueDatePicker" prefHeight="31.0" prefWidth="78.0" styleClass="datePicker" />
+                                          <DatePicker fx:id="dueDatePicker" promptText="Enter the Deadline" styleClass="datePicker" HBox.hgrow="ALWAYS" />
                                        </children>
                                     </HBox>
 
                                     <Label text="Description:" />
-                                    <TextArea fx:id="taskDescriptionField" prefHeight="120.0" promptText="Enter the Description of your Task" styleClass="descCreateTask" wrapText="true" />
+                                    <TextArea fx:id="taskDescriptionField" prefHeight="120.0" promptText="Enter the Description of your Task" styleClass="transparentTextArea" wrapText="true" />
 
                                     <Label text="Category:" />
                                     <ComboBox fx:id="categoryComboBox" prefWidth="150.0" promptText="Select Category" styleClass="selectComboBox" />
-
-                                    <Label text="Priority:" />
-                                    <ComboBox fx:id="priorityComboBox" prefWidth="150.0" promptText="Select Priority" styleClass="selectComboBox" />
+                                    <VBox spacing="5.0">
+                                       <children>
+                                          <CheckBox fx:id="priorityHighCheckBox" mnemonicParsing="false" text="Mark as Important" />
+                                       </children>
+                                    </VBox>
 
                                     <HBox alignment="CENTER" spacing="10.0">
                                        <children>
