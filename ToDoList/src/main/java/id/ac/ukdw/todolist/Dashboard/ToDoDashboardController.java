@@ -1,6 +1,7 @@
 package id.ac.ukdw.todolist.Dashboard;
 
 import id.ac.ukdw.todolist.ToDoListApplication;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -20,6 +21,7 @@ public class ToDoDashboardController implements Initializable {
     @FXML public Button todayBtn;
     @FXML public Button importantBtn;
     @FXML public Button categoryBtn;
+    @FXML public Button logOutBtn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,5 +58,10 @@ public class ToDoDashboardController implements Initializable {
 
     private void removeActiveStyle(Button btn) {
         btn.getStyleClass().remove("active");
+    }
+
+    public void onLogOut(ActionEvent actionEvent) {
+        ToDoListApplication.setUserData(null);
+        ToDoListApplication.setRoot("Login/ToDoLogin", null, false);
     }
 }
