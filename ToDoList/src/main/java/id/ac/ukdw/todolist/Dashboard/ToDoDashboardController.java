@@ -46,14 +46,7 @@ public class ToDoDashboardController implements Initializable {
     }
 
     private void setActiveButton(Button activeBtn) {
-        removeActiveStyle(todayBtn);
-        removeActiveStyle(statusBtn);
-        removeActiveStyle(importantBtn);
-        removeActiveStyle(categoryBtn);
 
-        if (activeBtn.getStyleClass().contains("btnTasks")) {
-            activeBtn.getStyleClass().add("active");
-        }
     }
 
     private void removeActiveStyle(Button btn) {
@@ -63,5 +56,8 @@ public class ToDoDashboardController implements Initializable {
     public void onLogOut(ActionEvent actionEvent) {
         ToDoListApplication.setUserData(null);
         ToDoListApplication.setRoot("Login/ToDoLogin", null, false);
+    }
+
+    public void onTheme(ActionEvent actionEvent) {
     }
 }

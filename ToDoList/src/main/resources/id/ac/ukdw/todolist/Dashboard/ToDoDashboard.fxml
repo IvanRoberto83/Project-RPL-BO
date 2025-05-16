@@ -40,6 +40,7 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
+                  <Button fx:id="ThemeBtn" mnemonicParsing="false" onAction="#onTheme" text="Theme" />
                   <Button fx:id="logOutBtn" mnemonicParsing="false" onAction="#onLogOut" styleClass="logoutBtn" text="🚪 Log Out" />
                </children>
             </HBox>

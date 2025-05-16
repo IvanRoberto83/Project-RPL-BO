@@ -69,6 +69,10 @@ ComboBox:focused {
     -fx-background-color: #C499B5;
 }
 
+.themeBtn{
+    -fx-background-color: white;
+    -fx-border-radius: 5px;
+}
 .selectComboBox .list-cell {
     -fx-text-fill: #C499B5;
     -fx-background-color: transparent;
