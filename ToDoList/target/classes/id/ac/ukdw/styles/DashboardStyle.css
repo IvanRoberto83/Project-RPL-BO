@@ -348,3 +348,27 @@ ComboBox:focused {
     -fx-background-color: #a5788e;
     -fx-border-color: #a5788e;
 }
+/* ============= */
+/* Category Filter CheckBoxes */
+/* ============= */
+.category-checkbox {
+    -fx-text-fill: #111;
+    -fx-font-size: 14px;
+    -fx-padding: 2 0 2 0; /* Top Right Bottom Left */
+}
+
+.category-checkbox .box {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #C499B5;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+
+.category-checkbox:selected .box {
+    -fx-background-color: #C499B5;
+    -fx-border-color: #C499B5;
+}
+
+.category-checkbox:selected .mark {
+    -fx-background-color: white; /* Warna tanda centang */
+}
