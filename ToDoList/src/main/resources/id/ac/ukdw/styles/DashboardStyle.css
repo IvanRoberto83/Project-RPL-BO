@@ -1,7 +1,3 @@
-/* ================== */
-/* Base & Global Styles */
-/* ================== */
-
 .label {
     -fx-text-fill: #111;
 }
@@ -10,9 +6,7 @@
     -fx-text-fill: #FFE3E3;
 }
 
-/* =============== */
-/* Layout & Panels */
-/* =============== */
+/* Layouting */
 
 .header {
     -fx-background-color: #C499B5;
@@ -24,9 +18,26 @@
     -fx-background-radius: 20;
 }
 
-/* ============ */
-/* Input Fields */
-/* ============ */
+.sectionFilter {
+    -fx-background-color: transparent;
+    -fx-border-color: #C499B5;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+}
+
+.sectionFilter .scroll-pane {
+    -fx-background-color: transparent;
+    -fx-fit-to-width: true;
+    -fx-hbar-policy: NEVER;
+    -fx-vbar-policy: AS_NEEDED;
+}
+
+.sectionFilter .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Fields */
 
 TextField,
 TextArea,
@@ -49,39 +60,37 @@ ComboBox:focused {
     -fx-background-color: transparent;
     -fx-prompt-text-fill: #C499B5;
     -fx-border-color: #C499B5;
-    -fx-text-fill: #C499B5;
+    -fx-text-fill: #111;
     -fx-control-inner-background: transparent;
+}
+
+.categoryCreateTask {
+    -fx-border-color: #C499B5;
+    -fx-border-width: 1px;
+    -fx-background-color: transparent;
+    -fx-text-fill: #111;
+    -fx-prompt-text-fill: #C499B5;
+}
+
+.categoryCreateTask .text-field {
+    -fx-background-color: transparent;
+}
+
+.categoryCreateTask .combo-box-base {
+    -fx-background-color: transparent;
+}
+
+.categoryCreateTask .arrow-button {
+    -fx-background-color: #C499B5;
+    -fx-background-radius: 0;
+}
+
+.categoryCreateTask .arrow {
+    -fx-background-color: white;
 }
 
 .descCreateTask .viewport {
     -fx-background-color: transparent;
-}
-
-.selectComboBox {
-    -fx-border-color: #C499B5;
-    -fx-border-width: 1px;
-    -fx-background-color: transparent;
-    -fx-text-fill: #C499B5;
-    -fx-prompt-text-fill: #C499B5;
-}
-
-.selectComboBox .arrow {
-    -fx-background-color: #C499B5;
-}
-
-.themeBtn{
-    -fx-background-color: white;
-    -fx-border-radius: 5px;
-}
-.selectComboBox .list-cell {
-    -fx-text-fill: #C499B5;
-    -fx-background-color: transparent;
-}
-
-.selectComboBox .list-cell:hover,
-.selectComboBox .list-cell:focused,
-.selectComboBox .list-cell:filled:selected {
-    -fx-text-fill: #C499B5;
 }
 
 .datePicker {
@@ -95,7 +104,7 @@ ComboBox:focused {
 .datePicker .text-field {
     -fx-background-color: transparent;
     -fx-prompt-text-fill: #C499B5;
-    -fx-text-fill: #C499B5;
+    -fx-text-fill: #111;
 }
 
 .datePicker .arrow-button {
@@ -116,7 +125,7 @@ ComboBox:focused {
     -fx-control-inner-background: transparent;
     -fx-prompt-text-fill: #C499B5;
     -fx-border-color: #C499B5;
-    -fx-text-fill: #C499B5;
+    -fx-text-fill: #111;
     -fx-border-width: 1px;
     -fx-border-radius: 5px;
     -fx-padding: 5px;
@@ -130,9 +139,7 @@ ComboBox:focused {
     -fx-background-color: transparent;
 }
 
-/* ========== */
-/* Buttons */
-/* ========== */
+/* Button */
 
 .btnTasks,
 .logoutBtn,
@@ -197,9 +204,15 @@ ComboBox:focused {
     -fx-background-color: #ccc;
 }
 
-/* ============ */
-/* Text Styles */
-/* ============ */
+.deleteBtn {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-padding: 5px;
+    -fx-font-size: 16px;
+}
+
+/* Text Styling */
 
 .dateLabel {
     -fx-text-fill: #111;
@@ -232,16 +245,14 @@ ComboBox:focused {
     -fx-text-fill: #333;
 }
 
-/* ============= */
-/* Status Labels */
-/* ============= */
+/*Status Label*/
 
 .statusInProgress {
     -fx-text-fill: #2196F3;
     -fx-font-weight: bold;
 }
 
-.statusNotStarted {
+.statusOutdated {
     -fx-text-fill: #F44336;
     -fx-font-weight: bold;
 }
@@ -251,9 +262,7 @@ ComboBox:focused {
     -fx-font-weight: bold;
 }
 
-/* ============== */
-/* Scroll Panes */
-/* ============== */
+/*Scroll Panel*/
 
 .scrollPanel,
 .contentScrollPane,
@@ -284,9 +293,7 @@ ComboBox:focused {
     -fx-border-color: transparent;
 }
 
-/* =========== */
-/* Cards */
-/* =========== */
+/* Task Cards */
 
 .taskCard {
     -fx-border-color: #C499B5;
@@ -300,9 +307,7 @@ ComboBox:focused {
     -fx-padding: 15;
 }
 
-/* ========= */
 /* Search Box */
-/* ========= */
 
 .searchBox {
     -fx-background-color: #C499B5;
@@ -314,9 +319,7 @@ ComboBox:focused {
     -fx-border-color: #FFE3E3;
 }
 
-/* ========= */
-/* Checkboxes */
-/* ========= */
+/* CheckBox */
 
 .check-box {
     -fx-padding: 5px;

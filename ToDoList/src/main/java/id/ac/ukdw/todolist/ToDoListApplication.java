@@ -1,11 +1,14 @@
 package id.ac.ukdw.todolist;
 
-import id.ac.ukdw.todolist.Database.DBConnectionManager;
+import id.ac.ukdw.todolist.Manager.DBConnectionManager;
 
+import id.ac.ukdw.todolist.Manager.NotificationManager;
+import id.ac.ukdw.todolist.Manager.SessionManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,12 +18,28 @@ public class ToDoListApplication extends Application {
     private static Stage primaryStage;
     private static Map<String, Object> userData;
 
+    static {
+        DBConnectionManager.createTables();
+    }
+
     @Override
     public void start(Stage stage) {
         primaryStage = stage;
         primaryStage.setTitle("Login");
-        primaryStage.setScene(new Scene(loadFXML("Login/ToDoLogin")));
-        primaryStage.setResizable(false);
+        if (SessionManager.getInstance().isLoggedIn() ) {
+            primaryStage.setTitle("To Do List");
+            primaryStage.setScene(new Scene(loadFXML("Dashboard/ToDoDashboard")));
+            primaryStage.setResizable(true);
+
+            Map<String, Object> userData = SessionManager.getInstance().getUserData();
+            int userId = (int) userData.get("user_id");
+
+            NotificationManager.checkAndNotifyTasks(userId);
+        } else {
+            primaryStage.setTitle("Login");
+            primaryStage.setScene(new Scene(loadFXML("Login/ToDoLogin")));
+            primaryStage.setResizable(false);
+        }
         primaryStage.show();
     }
 
@@ -40,16 +59,16 @@ public class ToDoListApplication extends Application {
         primaryStage.setResizable(isResizeable);
     }
 
-    public static void setUserData(Map<String, Object> data) {
-        userData = data;
+    public static Stage getPrimaryStage() {
+        return primaryStage;
     }
 
-    public static Map<String, Object> getUserData() {
-        return userData;
-    }
-
-    static {
-        DBConnectionManager.createTables();
+    public static void showAlert(Alert.AlertType type, String title, String header, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     public static void main(String[] args) {
