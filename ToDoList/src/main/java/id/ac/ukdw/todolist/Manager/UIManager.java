@@ -46,15 +46,15 @@ public class UIManager {
         }
     }
 
-    private VBox createTaskCard(Task task) {
-        VBox taskCard = new VBox();
-        taskCard.getStyleClass().add("taskCard");
-        taskCard.setStyle("-fx-cursor: hand;");
-        taskCard.setOnMouseClicked(e -> {
-            if (e.getClickCount() == 1) {
-                onEditTask.accept(task);
-            }
-        });
+//    private VBox createTaskCard(Task task) {
+//        VBox taskCard = new VBox();
+//        taskCard.getStyleClass().add("taskCard");
+//        taskCard.setStyle("-fx-cursor: hand;");
+//        taskCard.setOnMouseClicked(e -> {
+//            if (e.getClickCount() == 1) {
+//                onEditTask.accept(task);
+//            }
+//        });
 
         HBox mainTitleBox = createTitleBox(task);
         Label descLabel = createDescriptionLabel(task);
@@ -176,4 +176,49 @@ public class UIManager {
         }
     }
 
+    private void showDeleteConfirmation(Task task) {
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirm Delete");
+        confirmAlert.setHeaderText("Delete Task");
+        confirmAlert.setContentText("Are you sure you want to delete task '" + task.getTitle() + "'?");
+        Optional<ButtonType> result = confirmAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            onDeleteTask.accept(task.getId());
+        }
+    }
+
+    public void buildFilterPanel(String sql, VBox container, Set<String> selectedItems,
+                                 Runnable onFilterChange, String emptyMessage, String errorMessage) {
+        boolean hasItems = false;
+        try (Connection conn = DBConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String itemName = rs.getString("name");
+                CheckBox checkBox = new CheckBox(itemName);
+                checkBox.setSelected(selectedItems.contains(itemName));
+                checkBox.setOnAction(e -> {
+                    if (checkBox.isSelected()) {
+                        selectedItems.add(itemName);
+                    } else {
+                        selectedItems.remove(itemName);
+                    }
+                    onFilterChange.run();
+                });
+                container.getChildren().add(checkBox);
+                hasItems = true;
+            }
+            if (!hasItems) {
+                Label emptyLabel = new Label(emptyMessage);
+                emptyLabel.setStyle("-fx-text-fill: #888; -fx-font-style: italic;");
+                container.getChildren().add(emptyLabel);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Label errorLabel = new Label(errorMessage);
+            errorLabel.setStyle("-fx-text-fill: red;");
+            container.getChildren().add(errorLabel);
+        }
+    }
 }
