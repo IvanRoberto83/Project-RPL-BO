@@ -46,15 +46,15 @@ public class UIManager {
         }
     }
 
-//    private VBox createTaskCard(Task task) {
-//        VBox taskCard = new VBox();
-//        taskCard.getStyleClass().add("taskCard");
-//        taskCard.setStyle("-fx-cursor: hand;");
-//        taskCard.setOnMouseClicked(e -> {
-//            if (e.getClickCount() == 1) {
-//                onEditTask.accept(task);
-//            }
-//        });
+    private VBox createTaskCard(Task task) {
+        VBox taskCard = new VBox();
+        taskCard.getStyleClass().add("taskCard");
+        taskCard.setStyle("-fx-cursor: hand;");
+        taskCard.setOnMouseClicked(e -> {
+            if (e.getClickCount() == 1) {
+                onEditTask.accept(task);
+            }
+        });
 
         HBox mainTitleBox = createTitleBox(task);
         Label descLabel = createDescriptionLabel(task);
