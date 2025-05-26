@@ -323,6 +323,10 @@ public class ToDoDashboardController implements Initializable {
 
         if (taskManager.createTask(title, description, dueDate, categoryId, isHighPriority)) {
             showSuccessAlert("Create Task Successful", "You have successfully created a new task.");
+
+            List<String> categories = categoryManager.getAllCategories();
+            categoryCreateTask.getItems().setAll(categories);
+
             setCreateMode();
             refreshTasks();
         } else {
