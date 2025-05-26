@@ -111,4 +111,69 @@ public class UIManager {
         }
     }
 
+    private Button createDeleteButton(Task task) {
+        Button deleteBtn = new Button();
+        deleteBtn.getStyleClass().add("deleteBtn");
+
+        ImageView deleteIcon = new ImageView();
+        deleteIcon.setFitWidth(20);
+        deleteIcon.setFitHeight(20);
+        deleteIcon.setPreserveRatio(true);
+
+        if (setImageFromResource(deleteIcon, ICON_DELETE)) {
+            deleteBtn.setGraphic(deleteIcon);
+        } else {
+            deleteBtn.setText("🗑");
+            deleteBtn.setStyle("-fx-font-size: 16px;");
+        }
+
+        deleteBtn.setOnAction(e -> {
+            e.consume();
+            showDeleteConfirmation(task);
+        });
+
+        Tooltip.install(deleteBtn, new Tooltip("Delete task"));
+        return deleteBtn;
     }
+
+    private boolean setImageFromResource(ImageView imageView, String resourcePath) {
+        URL imageUrl = getClass().getResource(resourcePath);
+        if (imageUrl != null) {
+            imageView.setImage(new Image(imageUrl.toExternalForm()));
+            return true;
+        } else {
+            System.err.println("Image not found: " + resourcePath);
+            return false;
+        }
+    }
+
+    private Label createDescriptionLabel(Task task) {
+        Label descLabel = new Label(task.getDescription());
+        descLabel.getStyleClass().add("taskDescription");
+        descLabel.setWrapText(true);
+        return descLabel;
+    }
+
+    private HBox createStatusBox(Task task) {
+        HBox statusBox = new HBox(5);
+        Label statusLabel = new Label("Status:");
+        Label statusValue = new Label();
+        setStatusLabelStyle(task, statusValue);
+        statusBox.getChildren().addAll(statusLabel, statusValue);
+        return statusBox;
+    }
+
+    private void setStatusLabelStyle(Task task, Label statusValue) {
+        if (task.isFinished()) {
+            statusValue.setText("Completed");
+            statusValue.getStyleClass().add("statusCompleted");
+        } else if (task.isInProgress()) {
+            statusValue.setText("In Progress");
+            statusValue.getStyleClass().add("statusInProgress");
+        } else if (task.isOutdated()) {
+            statusValue.setText("Outdated");
+            statusValue.getStyleClass().add("statusOutdated");
+        }
+    }
+
+}
