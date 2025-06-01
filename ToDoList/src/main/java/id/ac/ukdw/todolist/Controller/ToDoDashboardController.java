@@ -299,12 +299,6 @@ public class ToDoDashboardController implements Initializable {
     // TASK CRUD OPERATIONS
     @FXML
     public void onCreateTask(ActionEvent actionEvent) {
-        if (taskTitleField.getText().isBlank()) {
-            showErrorAlert(isEditMode ? "Update Task Failed" : "Create Task Failed",
-                    "Please fill all the fields");
-            return;
-        }
-
         if (isEditMode) {
             updateTask();
         } else {
@@ -321,8 +315,25 @@ public class ToDoDashboardController implements Initializable {
 
         int categoryId = categoryManager.handleCategory(category);
 
+        // Validasi Input
+        if (title.isBlank() || dueDate == null || categoryId == -1) {
+            showErrorAlert("Create Task Failed", "Harap isi semua kolom dengan benar.");
+            return;
+        }
+
+        // Validasi Long Task & Category Title
+        if (title.length() >= 50) {
+            showErrorAlert("Update Task Failed", "Judul tugas tidak boleh melebihi 50 karakter.");
+            return;
+        }
+
+        if (category.length() >= 30) {
+            showErrorAlert("Update Task Failed", "Nama kategori tidak boleh melebihi 30 karakter.");
+            return;
+        }
+
         if (taskManager.createTask(title, description, dueDate, categoryId, isHighPriority)) {
-            showSuccessAlert("Create Task Successful", "You have successfully created a new task.");
+            showSuccessAlert("Create Task Successful", "Anda telah berhasil membuat task baru.");
 
             List<String> categories = categoryManager.getAllCategories();
             categoryCreateTask.getItems().setAll(categories);
@@ -330,7 +341,7 @@ public class ToDoDashboardController implements Initializable {
             setCreateMode();
             refreshTasks();
         } else {
-            showErrorAlert("Create Task Failed", "Failed to create task.");
+            showErrorAlert("Create Task Failed", "Gagal membuat task.");
         }
     }
 
@@ -344,12 +355,29 @@ public class ToDoDashboardController implements Initializable {
 
         int categoryId = categoryManager.handleCategory(category);
 
+        // Validasi Input
+        if (title.isBlank() || dueDate == null || categoryId == -1) {
+            showErrorAlert("Update Task Failed", "Harap isi semua kolom dengan benar.");
+            return;
+        }
+
+        // Validasi Long Task & Category Title
+        if (title.length() >= 50) {
+            showErrorAlert("Update Task Failed", "Judul tugas tidak boleh melebihi 50 karakter.");
+            return;
+        }
+
+        if (category.length() >= 30) {
+            showErrorAlert("Update Task Failed", "Nama kategori tidak boleh melebihi 30 karakter.");
+            return;
+        }
+
         if (taskManager.updateTask(currentEditingTaskId, title, description, dueDate, categoryId, isHighPriority, isCompleted)) {
-            showSuccessAlert("Update Task Successful", "Task has been updated successfully.");
+            showSuccessAlert("Update Task Successful", "Task telah berhasil diperbarui.");
             setCreateMode();
             refreshTasks();
         } else {
-            showErrorAlert("Update Task Failed", "Failed to update task.");
+            showErrorAlert("Update Task Failed", "Gagal memperbarui task.");
         }
     }
 
@@ -365,10 +393,10 @@ public class ToDoDashboardController implements Initializable {
 
     private void deleteTask(int taskId) {
         if (taskManager.deleteTask(taskId)) {
-            showSuccessAlert("Task Deleted", "Task deleted successfully!");
+            showSuccessAlert("Task Deleted", "Task berhasil dihapus!");
             refreshTasks();
         } else {
-            showErrorAlert("Delete Failed", "Failed to delete task!");
+            showErrorAlert("Delete Failed", "Gagal menghapus task!");
         }
     }
 
@@ -391,9 +419,9 @@ public class ToDoDashboardController implements Initializable {
         ToDoExcelController exporter = new ToDoExcelController();
         boolean success = exporter.exportTaskToExcel(userId, ToDoListApplication.getPrimaryStage());
         if (success) {
-            showSuccessAlert("Export Successful", "Tasks exported successfully!");
+            showSuccessAlert("Export Successful", "Tasks berhasil diekspor!");
         } else {
-            showErrorAlert("Export Failed", "Failed to export tasks!");
+            showErrorAlert("Export Failed", "Gagal mengekspor tasks!");
         }
     }
 
@@ -402,13 +430,13 @@ public class ToDoDashboardController implements Initializable {
         ToDoExcelController importer = new ToDoExcelController();
         boolean success = importer.importTaskFromExcel(ToDoListApplication.getPrimaryStage(), userId);
         if (success) {
-            showSuccessAlert("Import Successful", "Tasks imported successfully!");
+            showSuccessAlert("Import Successful", "Tasks berhasil diimpor!");
             refreshTasks();
 
             List<String> categories = categoryManager.getAllCategories();
             categoryCreateTask.getItems().setAll(categories);
         } else {
-            showErrorAlert("Import Failed", "Tasks import failed!");
+            showErrorAlert("Import Failed", "Impor tasks gagal!");
         }
     }
 
@@ -508,8 +536,8 @@ public class ToDoDashboardController implements Initializable {
         categoryCreateTask.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.trim().isEmpty()) {
                 String borderStyle = categoryCreateTask.getItems().contains(newValue.trim()) ?
-                        "-fx-border-color: #4CAF50; -fx-border-width: 2px; -fx-border-radius: 5px;" :
-                        "-fx-border-color: #FF9800; -fx-border-width: 2px; -fx-border-radius: 5px;";
+                    "-fx-border-color: #4CAF50; -fx-border-width: 2px; -fx-border-radius: 5px;" :
+                    "-fx-border-color: #FF9800; -fx-border-width: 2px; -fx-border-radius: 5px;";
                 categoryCreateTask.setStyle(borderStyle);
             } else {
                 categoryCreateTask.setStyle("");
