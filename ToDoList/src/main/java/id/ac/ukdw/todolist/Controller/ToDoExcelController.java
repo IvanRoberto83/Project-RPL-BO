@@ -1,6 +1,8 @@
 package id.ac.ukdw.todolist.Controller;
 
 import id.ac.ukdw.todolist.Manager.DBConnectionManager;
+import id.ac.ukdw.todolist.ToDoListApplication;
+import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.poi.ss.usermodel.*;
@@ -16,8 +18,32 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ToDoExcelController {
+
+    // Class untuk menyimpan error validasi
+    public static class ValidationError {
+        private int rowNumber;
+        private String message;
+
+        public ValidationError(int rowNumber, String message) {
+            this.rowNumber = rowNumber;
+            this.message = message;
+        }
+
+        public int getRowNumber() { return rowNumber; }
+        public String getMessage() { return message; }
+
+        @Override
+        public String toString() {
+            return "Row " + rowNumber + ": " + message;
+        }
+    }
+
+    private List<ValidationError> validationErrors = new ArrayList<>();
+
     public boolean exportTaskToExcel(int userId, Stage stage) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Export Tasks to Excel");
@@ -60,16 +86,8 @@ public class ToDoExcelController {
             headerStyle.setFont(headerFont);
             headerStyle.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
             headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-            headerStyle.setBorderBottom(BorderStyle.THIN);
-            headerStyle.setBorderTop(BorderStyle.THIN);
-            headerStyle.setBorderRight(BorderStyle.THIN);
-            headerStyle.setBorderLeft(BorderStyle.THIN);
 
             CellStyle dataStyle = workbook.createCellStyle();
-            dataStyle.setBorderBottom(BorderStyle.THIN);
-            dataStyle.setBorderTop(BorderStyle.THIN);
-            dataStyle.setBorderRight(BorderStyle.THIN);
-            dataStyle.setBorderLeft(BorderStyle.THIN);
 
             Row headerRow = sheet.createRow(0);
             String[] headers = {"Title", "Description", "Due Date", "Category", "Important"};
@@ -127,7 +145,7 @@ public class ToDoExcelController {
         }
     }
 
-    // Import
+    // Import dengan validasi
     public boolean importTaskFromExcel(Stage stage, int userId) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Import Tasks from Excel");
@@ -137,7 +155,20 @@ public class ToDoExcelController {
         File file = fileChooser.showOpenDialog(stage);
 
         if (file != null) {
-            return readTasksFromExcel(file, userId);
+            validationErrors.clear();
+            boolean result = readTasksFromExcel(file, userId);
+
+            if (!validationErrors.isEmpty()) {
+                StringBuilder errorMessage = new StringBuilder("Ditemukan beberapa kesalahan pada data yang diimpor:\n\n");
+                for (ValidationError error : validationErrors) {
+                    errorMessage.append("• ").append(error.toString()).append("\n");
+                }
+                errorMessage.append("\nBaris dengan kesalahan akan dilewati. Hanya data yang valid yang berhasil diimpor.");
+
+                showWarnAlert("Import System", errorMessage.toString());
+            }
+
+            return result;
         }
         return false;
     }
@@ -152,9 +183,14 @@ public class ToDoExcelController {
                 return false;
             }
 
+            int validRowCount = 0;
+            int totalRowCount = 0;
+
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
                 Row row = sheet.getRow(i);
                 if (row == null) continue;
+
+                totalRowCount++;
 
                 String title = getCellValueAsString(row.getCell(0));
                 String description = getCellValueAsString(row.getCell(1));
@@ -162,9 +198,15 @@ public class ToDoExcelController {
                 String categoryName = getCellValueAsString(row.getCell(3));
                 String importantStr = getCellValueAsString(row.getCell(4));
 
+                // Validasi data
+                if (!validateRowData(i + 1, title, dueDateStr, categoryName)) {
+                    continue;
+                }
+
                 boolean isImportant = "Yes".equalsIgnoreCase(importantStr);
                 Integer categoryId = null;
 
+                // Proses category
                 if (categoryName != null && !categoryName.equalsIgnoreCase("No Category")) {
                     try (PreparedStatement categoryStmt = conn.prepareStatement(
                             "SELECT id FROM category WHERE name = ? AND user_id = ?")) {
@@ -175,6 +217,7 @@ public class ToDoExcelController {
                         if (rs.next()) {
                             categoryId = rs.getInt("id");
                         } else {
+                            // Buat category baru
                             try (PreparedStatement insertCategoryStmt = conn.prepareStatement(
                                     "INSERT INTO category (name, user_id) VALUES (?, ?)",
                                     PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -191,6 +234,7 @@ public class ToDoExcelController {
                     }
                 }
 
+                // Cek apakah task sudah ada
                 try (PreparedStatement checkTaskStmt = conn.prepareStatement(
                         "SELECT id FROM task WHERE title = ? AND due_date = ? AND user_id = ?")) {
                     checkTaskStmt.setString(1, title);
@@ -199,6 +243,7 @@ public class ToDoExcelController {
                     ResultSet rs = checkTaskStmt.executeQuery();
 
                     if (rs.next()) {
+                        // Update existing task
                         int taskId = rs.getInt("id");
 
                         try (PreparedStatement updateStmt = conn.prepareStatement(
@@ -214,6 +259,7 @@ public class ToDoExcelController {
                         }
 
                     } else {
+                        // Insert new task
                         try (PreparedStatement insertStmt = conn.prepareStatement(
                                 "INSERT INTO task (title, description, due_date, category_id, important, user_id, status) " +
                                         "VALUES (?, ?, ?, ?, ?, ?, 'in_progress')")) {
@@ -230,9 +276,13 @@ public class ToDoExcelController {
                         }
                     }
                 }
+
+                validRowCount++;
             }
 
-            return true;
+            // Tampilkan jumlah baris yang valid
+            showWarnAlert("Import System", "Berhasil mengimpor " + validRowCount + " baris dari " + totalRowCount + " total baris yang diproses.\n");
+            return validRowCount > 0;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -240,7 +290,44 @@ public class ToDoExcelController {
         }
     }
 
-    // Read Cell And Convert To String
+    private boolean validateRowData(int rowNumber, String title, String dueDateStr, String categoryName) {
+        boolean isValid = true;
+
+        // Validasi Title
+        if (title == null || title.trim().isEmpty()) {
+            validationErrors.add(new ValidationError(rowNumber, "Title tidak boleh kosong"));
+            isValid = false;
+        } else if (title.trim().length() > 50) {
+            validationErrors.add(new ValidationError(rowNumber, "Title tidak boleh lebih dari 50 karakter (saat ini: " + title.trim().length() + ")"));
+            isValid = false;
+        }
+
+        // Validasi Due Date
+        if (dueDateStr == null || dueDateStr.trim().isEmpty() || dueDateStr.equalsIgnoreCase("No due date")) {
+            validationErrors.add(new ValidationError(rowNumber, "Due Date tidak boleh kosong"));
+            isValid = false;
+        } else {
+            // Validasi format tanggal
+            try {
+                LocalDate.parse(dueDateStr.trim());
+            } catch (Exception e) {
+                validationErrors.add(new ValidationError(rowNumber, "Format Due Date tidak valid (gunakan format: YYYY-MM-DD)"));
+                isValid = false;
+            }
+        }
+
+        // Validasi Category
+        if (categoryName == null || categoryName.trim().isEmpty()) {
+            validationErrors.add(new ValidationError(rowNumber, "Category tidak boleh kosong"));
+            isValid = false;
+        } else if (!categoryName.trim().equalsIgnoreCase("No Category") && categoryName.trim().length() > 30) {
+            validationErrors.add(new ValidationError(rowNumber, "Category tidak boleh lebih dari 30 karakter (saat ini: " + categoryName.trim().length() + ")"));
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
     private String getCellValueAsString(Cell cell) {
         if (cell == null) return "";
         switch (cell.getCellType()) {
@@ -260,10 +347,17 @@ public class ToDoExcelController {
     // Parsing
     private String parseDate(String dateStr) {
         try {
-            LocalDate date = LocalDate.parse(dateStr);
+            if (dateStr == null || dateStr.trim().isEmpty()) {
+                return null;
+            }
+            LocalDate date = LocalDate.parse(dateStr.trim());
             return date.toString();
         } catch (Exception e) {
             return null;
         }
+    }
+
+    private void showWarnAlert(String title, String message) {
+        ToDoListApplication.showAlert(Alert.AlertType.WARNING, "Warning", title, message);
     }
 }
