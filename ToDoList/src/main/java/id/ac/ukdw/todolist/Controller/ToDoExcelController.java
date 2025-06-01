@@ -1,6 +1,7 @@
 package id.ac.ukdw.todolist.Controller;
 
 import id.ac.ukdw.todolist.Manager.DBConnectionManager;
+import id.ac.ukdw.todolist.Model.ValidationError;
 import id.ac.ukdw.todolist.ToDoListApplication;
 import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
@@ -22,26 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ToDoExcelController {
-
-    // Class untuk menyimpan error validasi
-    public static class ValidationError {
-        private int rowNumber;
-        private String message;
-
-        public ValidationError(int rowNumber, String message) {
-            this.rowNumber = rowNumber;
-            this.message = message;
-        }
-
-        public int getRowNumber() { return rowNumber; }
-        public String getMessage() { return message; }
-
-        @Override
-        public String toString() {
-            return "Row " + rowNumber + ": " + message;
-        }
-    }
-
     private List<ValidationError> validationErrors = new ArrayList<>();
 
     public boolean exportTaskToExcel(int userId, Stage stage) {

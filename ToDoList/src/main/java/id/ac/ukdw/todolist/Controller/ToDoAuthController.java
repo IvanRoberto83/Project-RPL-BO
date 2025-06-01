@@ -57,7 +57,7 @@ public class ToDoAuthController {
         if (username.isEmpty()) {
             ToDoListApplication.showAlert(Alert.AlertType.ERROR, "Error",
                     "Forgot Password Failed",
-                    "Please enter your username first");
+                    "Silakan masukkan nama pengguna Anda terlebih dahulu.");
             return;
         }
 
@@ -68,7 +68,7 @@ public class ToDoAuthController {
             } else {
                 ToDoListApplication.showAlert(Alert.AlertType.ERROR, "Error",
                         "User Not Found",
-                        "No account found with username: " + username);
+                        "Tidak ditemukan akun dengan nama pengguna: " + username);
             }
         } catch (SQLException e) {
             handleDatabaseError(e);
@@ -85,21 +85,21 @@ public class ToDoAuthController {
         if (username.isEmpty() || password.isEmpty()) {
             ToDoListApplication.showAlert(Alert.AlertType.ERROR, "Error",
                     "Registration Failed",
-                    "Please fill all the fields");
+                    "Harap isi semua kolom yang tersedia");
             return;
         }
 
         if (!password.equals(rePassword)) {
             ToDoListApplication.showAlert(Alert.AlertType.ERROR, "Error",
                     "Registration Failed",
-                    "Passwords do not match");
+                    "Kata sandi tidak cocok");
             return;
         }
 
         if (username.length() > 9) {
             ToDoListApplication.showAlert(Alert.AlertType.ERROR, "Error",
                     "Registration Failed",
-                    "Username must be less than 8 characters");
+                    "Nama pengguna harus kurang dari 8 karakter");
             return;
         }
 
@@ -108,12 +108,12 @@ public class ToDoAuthController {
             if (success) {
                 ToDoListApplication.showAlert(Alert.AlertType.INFORMATION, "Success",
                         "Registration Successful",
-                        "You have successfully registered.");
+                        "Anda telah berhasil mendaftar.");
                 ToDoListApplication.setRoot("Login/ToDoLogin", "Login", false);
             } else {
                 ToDoListApplication.showAlert(Alert.AlertType.ERROR, "Error",
                         "Registration Failed",
-                        "An error occurred while registering. Please try again.");
+                        "Terjadi kesalahan saat mendaftar. Silakan coba lagi.");
             }
         } catch (SQLException e) {
             handleDatabaseError(e);
@@ -128,14 +128,14 @@ public class ToDoAuthController {
         if (newPassword.isEmpty() || confirmPassword.isEmpty()) {
             ToDoListApplication.showAlert(Alert.AlertType.ERROR, "Error",
                     "Password Reset Failed",
-                    "Please fill all the fields");
+                    "Harap isi semua kolom yang tersedia");
             return;
         }
 
         if (!newPassword.equals(confirmPassword)) {
             ToDoListApplication.showAlert(Alert.AlertType.ERROR, "Error",
                     "Password Reset Failed",
-                    "Passwords do not match");
+                    "Kata sandi tidak cocok");
             return;
         }
 
@@ -143,7 +143,7 @@ public class ToDoAuthController {
             if (resetUsername == null || resetUsername.isEmpty()) {
                 ToDoListApplication.showAlert(Alert.AlertType.ERROR, "Error",
                         "Session Expired",
-                        "Please restart the password reset process");
+                        "Mulai ulang proses pengaturan ulang kata sandi");
                 ToDoListApplication.setRoot("Login/ToDoLogin", "Login", false);
                 return;
             }
@@ -152,13 +152,13 @@ public class ToDoAuthController {
             if (success) {
                 ToDoListApplication.showAlert(Alert.AlertType.INFORMATION, "Success",
                         "Password Changed",
-                        "Your password has been successfully changed.");
+                        "Kata sandi Anda telah berhasil diubah.");
                 resetUsername = null;
                 ToDoListApplication.setRoot("Login/ToDoLogin", "Login", false);
             } else {
                 ToDoListApplication.showAlert(Alert.AlertType.ERROR, "Error",
                         "Password Change Failed",
-                        "An error occurred while updating the password.");
+                        "Terjadi kesalahan saat memperbarui kata sandi.");
             }
         } catch (SQLException e) {
             handleDatabaseError(e);
@@ -173,7 +173,7 @@ public class ToDoAuthController {
         if (username.isEmpty() || password.isEmpty()) {
             ToDoListApplication.showAlert(Alert.AlertType.ERROR, "Error",
                     "Login Failed",
-                    "Please fill all the fields");
+                    "Harap isi semua kolom yang tersedia");
             return;
         }
 
@@ -182,7 +182,7 @@ public class ToDoAuthController {
             if (userData != null) {
                 ToDoListApplication.showAlert(Alert.AlertType.INFORMATION, "Success",
                         "Login Successful",
-                        "You have successfully logged in.");
+                        "Anda telah berhasil masuk.");
                 SessionManager.getInstance().login();
                 SessionManager.getInstance().setUserData(userData);
 
@@ -193,7 +193,7 @@ public class ToDoAuthController {
             } else {
                 ToDoListApplication.showAlert(Alert.AlertType.ERROR, "Error",
                         "Login Failed",
-                        "Invalid username or password.");
+                        "Nama pengguna atau kata sandi tidak valid.");
             }
         } catch (SQLException e) {
             handleDatabaseError(e);
