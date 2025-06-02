@@ -278,8 +278,8 @@ public class ToDoExcelController {
         if (title == null || title.trim().isEmpty()) {
             validationErrors.add(new ValidationError(rowNumber, "Title tidak boleh kosong"));
             isValid = false;
-        } else if (title.trim().length() > 50) {
-            validationErrors.add(new ValidationError(rowNumber, "Title tidak boleh lebih dari 50 karakter (saat ini: " + title.trim().length() + ")"));
+        } else if (title.trim().length() > 20) {
+            validationErrors.add(new ValidationError(rowNumber, "Title tidak boleh lebih dari 20 karakter (saat ini: " + title.trim().length() + ")"));
             isValid = false;
         }
 
@@ -301,8 +301,8 @@ public class ToDoExcelController {
         if (categoryName == null || categoryName.trim().isEmpty()) {
             validationErrors.add(new ValidationError(rowNumber, "Category tidak boleh kosong"));
             isValid = false;
-        } else if (!categoryName.trim().equalsIgnoreCase("No Category") && categoryName.trim().length() > 30) {
-            validationErrors.add(new ValidationError(rowNumber, "Category tidak boleh lebih dari 30 karakter (saat ini: " + categoryName.trim().length() + ")"));
+        } else if (!categoryName.trim().equalsIgnoreCase("No Category") && categoryName.trim().length() > 15) {
+            validationErrors.add(new ValidationError(rowNumber, "Category tidak boleh lebih dari 15 karakter (saat ini: " + categoryName.trim().length() + ")"));
             isValid = false;
         }
 

@@ -322,13 +322,13 @@ public class ToDoDashboardController implements Initializable {
         }
 
         // Validasi Long Task & Category Title
-        if (title.length() >= 50) {
-            showErrorAlert("Update Task Failed", "Judul tugas tidak boleh melebihi 50 karakter.");
+        if (title.length() >= 20) {
+            showErrorAlert("Update Task Failed", "Judul tugas tidak boleh melebihi 20 karakter.");
             return;
         }
 
-        if (category.length() >= 30) {
-            showErrorAlert("Update Task Failed", "Nama kategori tidak boleh melebihi 30 karakter.");
+        if (category.length() >= 15) {
+            showErrorAlert("Update Task Failed", "Nama kategori tidak boleh melebihi 15 karakter.");
             return;
         }
 
@@ -362,13 +362,13 @@ public class ToDoDashboardController implements Initializable {
         }
 
         // Validasi Long Task & Category Title
-        if (title.length() >= 50) {
-            showErrorAlert("Update Task Failed", "Judul tugas tidak boleh melebihi 50 karakter.");
+        if (title.length() >= 20) {
+            showErrorAlert("Update Task Failed", "Judul tugas tidak boleh melebihi 20 karakter.");
             return;
         }
 
-        if (category.length() >= 30) {
-            showErrorAlert("Update Task Failed", "Nama kategori tidak boleh melebihi 30 karakter.");
+        if (category.length() >= 15) {
+            showErrorAlert("Update Task Failed", "Nama kategori tidak boleh melebihi 15 karakter.");
             return;
         }
 
