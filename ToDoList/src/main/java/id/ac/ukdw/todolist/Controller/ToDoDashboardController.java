@@ -173,16 +173,17 @@ public class ToDoDashboardController implements Initializable {
         priorityHighCheckBox.setSelected(task.getIsImportant());
 
         String categoryName = categoryManager.getTaskCategory(task.getId());
-        if (categoryName != null) {
-            if (categoryCreateTask.getItems().contains(categoryName)) {
-                categoryCreateTask.setValue(categoryName);
-            } else {
-                refreshCategoryComboBox();
-                categoryCreateTask.setValue(categoryName);
-            }
+        if (categoryName != null && !categoryName.trim().isEmpty()) {
+            refreshCategoryComboBox();
+
+            categoryCreateTask.setValue(categoryName);
+            categoryCreateTask.getEditor().setText(categoryName);
+            categoryCreateTask.setStyle("-fx-border-color: #4CAF50; -fx-border-width: 2px; -fx-border-radius: 5px;");
         } else {
+            // No category assigned
             categoryCreateTask.setValue(null);
             categoryCreateTask.getEditor().clear();
+            categoryCreateTask.setStyle("");
         }
     }
 
