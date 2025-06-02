@@ -132,6 +132,7 @@ public class ToDoDashboardController implements Initializable {
     private void setEditMode(Task task) {
         setMode(true, task.getId(), "Edit Task", "SAVE TASK", "CANCEL");
         showCompletedCheckbox(task.isFinished());
+        refreshCategoryComboBox();
         fillFormWithTask(task);
     }
 
@@ -158,6 +159,11 @@ public class ToDoDashboardController implements Initializable {
         }
     }
 
+    private void refreshCategoryComboBox() {
+        List<String> categories = categoryManager.getAllCategories();
+        categoryCreateTask.getItems().setAll(categories);
+    }
+
     private void fillFormWithTask(Task task) {
         taskTitleField.setText(task.getTitle());
         taskDescriptionField.setText(task.getDescription());
@@ -168,7 +174,12 @@ public class ToDoDashboardController implements Initializable {
 
         String categoryName = categoryManager.getTaskCategory(task.getId());
         if (categoryName != null) {
-            categoryCreateTask.setValue(categoryName);
+            if (categoryCreateTask.getItems().contains(categoryName)) {
+                categoryCreateTask.setValue(categoryName);
+            } else {
+                refreshCategoryComboBox();
+                categoryCreateTask.setValue(categoryName);
+            }
         } else {
             categoryCreateTask.setValue(null);
             categoryCreateTask.getEditor().clear();
@@ -299,6 +310,36 @@ public class ToDoDashboardController implements Initializable {
     // TASK CRUD OPERATIONS
     @FXML
     public void onCreateTask(ActionEvent actionEvent) {
+        String title = taskTitleField.getText();
+        LocalDate dueDate = dueDatePicker.getValue();
+        String category = getCategoryValue();
+
+        String mode = isEditMode ? "Update" : "Create";
+        String modeTitle = mode + " Task Failed";
+
+        // Validasi Input handle category
+        if (title.isBlank() || dueDate == null) {
+            showErrorAlert(modeTitle, "Harap isi semua kolom dengan benar.");
+            return;
+        }
+
+        // Validasi Long Task & Category Title handle category
+        if (title.length() >= 20) {
+            showErrorAlert(modeTitle, "Judul tugas tidak boleh melebihi 20 karakter.");
+            return;
+        }
+
+        if (category.length() >= 15) {
+            showErrorAlert(modeTitle, "Nama kategori tidak boleh melebihi 15 karakter.");
+            return;
+        }
+
+        // Validasi kategori kosong
+        if (category.isBlank()) {
+            showErrorAlert(modeTitle, "Kategori tidak boleh kosong.");
+            return;
+        }
+
         if (isEditMode) {
             updateTask();
         } else {
@@ -315,28 +356,15 @@ public class ToDoDashboardController implements Initializable {
 
         int categoryId = categoryManager.handleCategory(category);
 
-        // Validasi Input
-        if (title.isBlank() || dueDate == null || categoryId == -1) {
-            showErrorAlert("Create Task Failed", "Harap isi semua kolom dengan benar.");
-            return;
-        }
-
-        // Validasi Long Task & Category Title
-        if (title.length() >= 20) {
-            showErrorAlert("Update Task Failed", "Judul tugas tidak boleh melebihi 20 karakter.");
-            return;
-        }
-
-        if (category.length() >= 15) {
-            showErrorAlert("Update Task Failed", "Nama kategori tidak boleh melebihi 15 karakter.");
+        if (categoryId == -1) {
+            showErrorAlert("Create Task Failed", "Gagal memproses kategori.");
             return;
         }
 
         if (taskManager.createTask(title, description, dueDate, categoryId, isHighPriority)) {
             showSuccessAlert("Create Task Successful", "Anda telah berhasil membuat task baru.");
 
-            List<String> categories = categoryManager.getAllCategories();
-            categoryCreateTask.getItems().setAll(categories);
+            refreshCategoryComboBox();
 
             setCreateMode();
             refreshTasks();
@@ -355,25 +383,16 @@ public class ToDoDashboardController implements Initializable {
 
         int categoryId = categoryManager.handleCategory(category);
 
-        // Validasi Input
-        if (title.isBlank() || dueDate == null || categoryId == -1) {
-            showErrorAlert("Update Task Failed", "Harap isi semua kolom dengan benar.");
-            return;
-        }
-
-        // Validasi Long Task & Category Title
-        if (title.length() >= 20) {
-            showErrorAlert("Update Task Failed", "Judul tugas tidak boleh melebihi 20 karakter.");
-            return;
-        }
-
-        if (category.length() >= 15) {
-            showErrorAlert("Update Task Failed", "Nama kategori tidak boleh melebihi 15 karakter.");
+        if (categoryId == -1) {
+            showErrorAlert("Update Task Failed", "Gagal memproses kategori.");
             return;
         }
 
         if (taskManager.updateTask(currentEditingTaskId, title, description, dueDate, categoryId, isHighPriority, isCompleted)) {
             showSuccessAlert("Update Task Successful", "Task telah berhasil diperbarui.");
+
+            refreshCategoryComboBox();
+
             setCreateMode();
             refreshTasks();
         } else {
